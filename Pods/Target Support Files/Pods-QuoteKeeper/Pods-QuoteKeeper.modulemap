@@ -1,0 +1,6 @@
+framework module Pods_QuoteKeeper {
+  umbrella header "Pods-QuoteKeeper-umbrella.h"
+
+  export *
+  module * { export * }
+}
