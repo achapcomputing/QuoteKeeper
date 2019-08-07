@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseUI
 
-class MoreViewController: UIViewController, FUIAuthDelegate {
+class AccountViewController: UIViewController, FUIAuthDelegate {
 
 	var authUI: FUIAuth?
 	

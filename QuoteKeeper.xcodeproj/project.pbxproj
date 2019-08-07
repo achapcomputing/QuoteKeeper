@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		36B88544ACDDE51A0CEC484D /* Pods_QuoteKeeper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8C3138470C44DAC36DA346C /* Pods_QuoteKeeper.framework */; };
+		DC4908C922FB60C7005243BF /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4908C822FB60C7005243BF /* EditViewController.swift */; };
+		DC50E66922FB2DC60012DBD3 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50E66822FB2DC60012DBD3 /* Quote.swift */; };
 		DCCDE2C922E68A2200C451CF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCDE2C822E68A2200C451CF /* DetailViewController.swift */; };
 		DCCDE2CB22E69FD100C451CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DCCDE2CA22E69FD000C451CF /* GoogleService-Info.plist */; };
-		DCCDE2CD22E7A5AD00C451CF /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCDE2CC22E7A5AD00C451CF /* MoreViewController.swift */; };
+		DCCDE2CD22E7A5AD00C451CF /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCDE2CC22E7A5AD00C451CF /* AccountViewController.swift */; };
 		DCCF83A322E5212500E767B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCF83A222E5212500E767B2 /* AppDelegate.swift */; };
 		DCCF83A822E5212500E767B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCCF83A622E5212500E767B2 /* Main.storyboard */; };
 		DCCF83AA22E5212700E767B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCCF83A922E5212700E767B2 /* Assets.xcassets */; };
@@ -23,9 +25,11 @@
 /* Begin PBXFileReference section */
 		7F351CCC37457A19A2C87275 /* Pods-QuoteKeeper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuoteKeeper.release.xcconfig"; path = "Target Support Files/Pods-QuoteKeeper/Pods-QuoteKeeper.release.xcconfig"; sourceTree = "<group>"; };
 		C8C3138470C44DAC36DA346C /* Pods_QuoteKeeper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuoteKeeper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC4908C822FB60C7005243BF /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		DC50E66822FB2DC60012DBD3 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		DCCDE2C822E68A2200C451CF /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		DCCDE2CA22E69FD000C451CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		DCCDE2CC22E7A5AD00C451CF /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		DCCDE2CC22E7A5AD00C451CF /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		DCCF839F22E5212500E767B2 /* QuoteKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuoteKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCCF83A222E5212500E767B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCCF83A722E5212500E767B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -50,6 +54,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DC4908CA22FB60CE005243BF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DC50E66822FB2DC60012DBD3 /* Quote.swift */,
+				DCE6FD3822E55740009BAF77 /* QuoteInfo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DC4908CB22FB60E4005243BF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DC4908CC22FB6100005243BF /* AllQuotesVC */,
+				DCCF83B422E5233F00E767B2 /* AddViewController.swift */,
+				DCCDE2CC22E7A5AD00C451CF /* AccountViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DC4908CC22FB6100005243BF /* AllQuotesVC */ = {
+			isa = PBXGroup;
+			children = (
+				DCE6FD3A22E55A77009BAF77 /* AllQuotesTableViewController.swift */,
+				DCCDE2C822E68A2200C451CF /* DetailViewController.swift */,
+				DC4908C822FB60C7005243BF /* EditViewController.swift */,
+			);
+			path = AllQuotesVC;
+			sourceTree = "<group>";
+		};
 		DCCF839622E5212500E767B2 = {
 			isa = PBXGroup;
 			children = (
@@ -72,12 +105,9 @@
 			isa = PBXGroup;
 			children = (
 				DCCF83A222E5212500E767B2 /* AppDelegate.swift */,
-				DCE6FD3822E55740009BAF77 /* QuoteInfo.swift */,
 				DCCF83A622E5212500E767B2 /* Main.storyboard */,
-				DCE6FD3A22E55A77009BAF77 /* AllQuotesTableViewController.swift */,
-				DCCDE2C822E68A2200C451CF /* DetailViewController.swift */,
-				DCCF83B422E5233F00E767B2 /* AddViewController.swift */,
-				DCCDE2CC22E7A5AD00C451CF /* MoreViewController.swift */,
+				DC4908CA22FB60CE005243BF /* Model */,
+				DC4908CB22FB60E4005243BF /* Controller */,
 				DCCF83A922E5212700E767B2 /* Assets.xcassets */,
 				DCCF83AB22E5212700E767B2 /* LaunchScreen.storyboard */,
 				DCCF83AE22E5212700E767B2 /* Info.plist */,
@@ -237,11 +267,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC4908C922FB60C7005243BF /* EditViewController.swift in Sources */,
 				DCE6FD3922E55740009BAF77 /* QuoteInfo.swift in Sources */,
 				DCE6FD3B22E55A78009BAF77 /* AllQuotesTableViewController.swift in Sources */,
 				DCCDE2C922E68A2200C451CF /* DetailViewController.swift in Sources */,
-				DCCDE2CD22E7A5AD00C451CF /* MoreViewController.swift in Sources */,
+				DCCDE2CD22E7A5AD00C451CF /* AccountViewController.swift in Sources */,
 				DCCF83A322E5212500E767B2 /* AppDelegate.swift in Sources */,
+				DC50E66922FB2DC60012DBD3 /* Quote.swift in Sources */,
 				DCCF83B522E5233F00E767B2 /* AddViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

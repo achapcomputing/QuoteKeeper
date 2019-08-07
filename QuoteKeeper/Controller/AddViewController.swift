@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class AddViewController: UIViewController, UITextFieldDelegate {
 
@@ -14,31 +15,47 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 	@IBOutlet weak var presetButton: UIButton!
 	@IBOutlet weak var sourceLabel: UILabel!
 	@IBOutlet weak var sourceText: UITextField!
-	@IBOutlet weak var bookLabel: UILabel!
-	@IBOutlet weak var bookSwitch: UISwitch!
 	@IBOutlet weak var pageLabel: UILabel!
 	@IBOutlet weak var pageText: UITextField!
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var titleText: UITextField!
+	@IBOutlet weak var characterLabel: UILabel!
+	@IBOutlet weak var characterText: UITextField!
+	
+	@IBAction func saveButtonTouched(_ sender: Any) {
+		
+		let quote = textView.text
+		let source = sourceText.text
+		
+		let medium = titleText.text
+		let char = characterText.text
+		let pageNum = pageText.text
+		
+		let fstore = Firestore.firestore()
+		var ref: DocumentReference? = nil
+		var docID: String = "-1"
+		
+		ref = fstore.collection("quotes").addDocument(data: ["quote" : quote ?? "", "source" : source ?? ""]) { err in
+			if let err = err {
+				print("Error adding document: \(err)")
+			} else {
+				docID = ref!.documentID
+				print("quote document added with ID: \(docID)")
+				
+				// Add the extra info about the quote
+				fstore.collection("quotes-info").document("info-\(docID)").setData(["medium" : medium ?? "", "char" : char ?? "", "page-num" : pageNum ?? ""]) { err in
+					if let err = err {
+						print("Error adding document: \(err)")
+					} else {
+						print("quotes-info document added with ID: \(docID)")
+					}
+				}
+			}
+		}
+		print("Saved")
+	}
 	
 	@IBAction func presetButtonTouch(_ sender: Any) {
-	}
-	// changes display based off the quote is from a book
-	@IBAction func bookSwitchChanged(_ sender: Any) {
-		// quote is from a book, prompt for title and page number
-		if bookSwitch.isOn {
-			pageLabel.isHidden = false
-			pageText.isHidden = false
-			titleLabel.isHidden = false
-			titleText.isHidden = false
-		}
-		// quote is not from a book, remove title and page number prompts
-		else {
-			pageLabel.isHidden = true
-			pageText.isHidden = true
-			titleLabel.isHidden = true
-			titleText.isHidden = true
-		}
 	}
 	
 	
@@ -51,6 +68,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 	}
 	
 	var quoteInfo = QuoteInfo()
+	///var quote = Quote()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -60,9 +78,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 		pageText.delegate = self
 		titleText.delegate = self
 		
-		if quoteInfo.quote != "quote" {
-			//quoteLabel.text = quoteInfo.quote
-			sourceLabel.text = quoteInfo.source
+		if quoteInfo.title != "title" {
 			titleLabel.text = quoteInfo.title
 			pageLabel.text = quoteInfo.pageNum
 		}

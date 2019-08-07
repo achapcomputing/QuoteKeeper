@@ -20,21 +20,21 @@ class DetailViewController: UIViewController {
 		present(activityViewController, animated: true, completion: nil)
 	}
 	
-	var quoteInfo = QuoteInfo()
+	var selectedQuote: Quote? = Quote()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		quoteLabel.text = quoteInfo.quote
-		sourceLabel.text = quoteInfo.source
-		titleLabel.text = quoteInfo.title
-		pageLabel.text = quoteInfo.pageNum
-        // Do any additional setup after loading the view.
+		quoteLabel.text = selectedQuote?.quote
+		sourceLabel.text = selectedQuote?.source
+		//titleLabel.text = selectedQuote.title
+		//pageLabel.text = selectedQuote.pageNum
+
     }
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.destination is AddViewController {
-			let addVC = segue.destination as? AddViewController
-			//addVC?.quoteInfo = sender as! QuoteInfo
+			let _ = segue.destination as? AddViewController // _ is addVC
+			//addVC?.selectedQuote = sender as! Quote
 		}
 	}
 

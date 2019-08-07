@@ -7,11 +7,19 @@
 //
 
 import UIKit
+import Firebase
 
 class AllQuotesTableViewController: UITableViewController {
+	
+	var allQuotes: [Quote] = []
+	
+	func viewWillAppear() {
+		getQuote()
+	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		//getQuote()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -27,12 +35,14 @@ class AllQuotesTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return QuoteInfo.data.count
+        return allQuotes.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-		cell.textLabel?.text = QuoteInfo.data[indexPath.row].quote // shows quote in each cell
+		cell.textLabel?.text = allQuotes[indexPath.row].quote // shows quote in each cell
+		cell.detailTextLabel?.text = allQuotes[indexPath.row].source // adds source to each cell
+		print(allQuotes[indexPath.row].quote)
         return cell
     }
 	
@@ -40,13 +50,41 @@ class AllQuotesTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
-		performSegue(withIdentifier: "detailSegue", sender: QuoteInfo.data[indexPath.row])
+		performSegue(withIdentifier: "detailSegue", sender: allQuotes[indexPath.row])
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.destination is DetailViewController {
 			let detailVC = segue.destination as? DetailViewController
-			detailVC?.quoteInfo = sender as! QuoteInfo
+			detailVC?.selectedQuote = sender as? Quote
+		}
+	}
+	
+	func getQuote() {
+		var quote = ""
+		var source = ""
+		let fstore = Firestore.firestore()
+		var ref: CollectionReference? = nil
+		
+		ref = fstore.collection("quotes")
+		ref?.getDocuments() { (querySnapshot, err) in
+			if let err = err {
+				print("Error getting documents: \(err)")
+			} else {
+				for document in querySnapshot!.documents {
+					print("\(document.documentID) => \(document.data())")
+					
+					quote = document.data()["quote"] as! String
+					source = document.data()["source"] as! String
+					var newQuote: Quote
+					newQuote = Quote(quote: quote, source: source)
+					self.allQuotes.append(newQuote)
+				}
+				// MARK: prints nothin??
+				for element in self.allQuotes {
+					print("allQuotes: \(element.quote) and \(element.source ?? "")")
+				}
+			}
 		}
 	}
 	
