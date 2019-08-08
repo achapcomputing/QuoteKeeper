@@ -10,20 +10,20 @@ import Foundation
 
 class QuoteInfo: NSObject {
 
-	let title: String?
+	let medium: String?
 	let char: String?
 	let pageNum: String?
 	
 	override init() {
-		self.title = "title"
+		self.medium = "medium"
 		self.char = "char"
-		self.pageNum = "-1"
+		self.pageNum = ""
 	}
 	
 	// TODO: Create inits when missing parts of info (no page, etc)
 	
-	init(title: String, char: String, pageNum: String) {
-		self.title = title
+	init(medium: String, char: String, pageNum: String) {
+		self.medium = medium
 		self.char = char
 		self.pageNum = pageNum
 		super.init()

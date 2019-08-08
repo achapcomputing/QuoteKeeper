@@ -11,30 +11,19 @@ import Firebase
 
 class AllQuotesTableViewController: UITableViewController {
 	
-	var allQuotes: [Quote] = []
+	var allQuotes = [Quote]()
 	
-	func viewWillAppear() {
-		getQuote()
-	}
-
-    override func viewDidLoad() {
+	override func viewDidLoad() {
         super.viewDidLoad()
-		//getQuote()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
-
-    // MARK: - Table view data source
+		loadQuoteData()
+	}
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		print("Tableview setup \(allQuotes.count)")
         return allQuotes.count
     }
 
@@ -42,11 +31,11 @@ class AllQuotesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 		cell.textLabel?.text = allQuotes[indexPath.row].quote // shows quote in each cell
 		cell.detailTextLabel?.text = allQuotes[indexPath.row].source // adds source to each cell
-		print(allQuotes[indexPath.row].quote)
+		print("cellQuotes: \(allQuotes[indexPath.row].quote)")
         return cell
     }
 	
-	var segueIdentifiers = ["detailSegue", "addSegue"]
+	var segueIdentifiers = ["detailSegue", "editSegue"]
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
@@ -56,13 +45,16 @@ class AllQuotesTableViewController: UITableViewController {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.destination is DetailViewController {
 			let detailVC = segue.destination as? DetailViewController
-			detailVC?.selectedQuote = sender as? Quote
+			detailVC?.selectedQuote = sender as! Quote
 		}
 	}
 	
-	func getQuote() {
+	// TODO: RELOAD QUOTES WHEN NEW QUOTE IS ADDED TO DATABASE
+	
+	func loadQuoteData() {
 		var quote = ""
 		var source = ""
+		var docID = ""
 		let fstore = Firestore.firestore()
 		var ref: CollectionReference? = nil
 		
@@ -73,18 +65,18 @@ class AllQuotesTableViewController: UITableViewController {
 			} else {
 				for document in querySnapshot!.documents {
 					print("\(document.documentID) => \(document.data())")
-					
 					quote = document.data()["quote"] as! String
 					source = document.data()["source"] as! String
+					docID = document.documentID
 					var newQuote: Quote
-					newQuote = Quote(quote: quote, source: source)
+					newQuote = Quote(quote: quote, source: source, docID: docID)
 					self.allQuotes.append(newQuote)
 				}
-				// MARK: prints nothin??
 				for element in self.allQuotes {
-					print("allQuotes: \(element.quote) and \(element.source ?? "")")
+					print("allQuotes: \(element.quote) and \(element.source ?? "") and \(element.docID)")
 				}
 			}
+			self.tableView.reloadData()
 		}
 	}
 	
@@ -136,3 +128,17 @@ class AllQuotesTableViewController: UITableViewController {
     */
 
 }
+
+/*
+class UserCell: UITableViewCell {
+	
+	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+		super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+	}
+	
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+	
+}
+*/

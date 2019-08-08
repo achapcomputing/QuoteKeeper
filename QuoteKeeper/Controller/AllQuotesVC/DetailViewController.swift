@@ -7,45 +7,69 @@
 //
 
 import UIKit
+import Firebase
 
 class DetailViewController: UIViewController {
 
 	@IBOutlet weak var quoteLabel: UILabel!
 	@IBOutlet weak var sourceLabel: UILabel!
-	@IBOutlet weak var titleLabel: UILabel!
+	@IBOutlet weak var mediumLabel: UILabel!
+	@IBOutlet weak var charLabel: UILabel!
 	@IBOutlet weak var pageLabel: UILabel!
 	
 	@IBAction func shareButtonTouched(_ sender: Any) {
-		let activityViewController = UIActivityViewController(activityItems: [quoteLabel.text!, sourceLabel.text!], applicationActivities: nil)
+		let activityViewController = UIActivityViewController(activityItems: [quoteLabel.text!, "by",  sourceLabel.text ?? ""], applicationActivities: nil)
 		present(activityViewController, animated: true, completion: nil)
 	}
 	
-	var selectedQuote: Quote? = Quote()
+	var selectedQuote: Quote = Quote()
+	var selectedQuoteInfo: QuoteInfo? = QuoteInfo()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		quoteLabel.text = selectedQuote?.quote
-		sourceLabel.text = selectedQuote?.source
-		//titleLabel.text = selectedQuote.title
-		//pageLabel.text = selectedQuote.pageNum
-
+		loadQuoteInfoData()
     }
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.destination is AddViewController {
-			let _ = segue.destination as? AddViewController // _ is addVC
-			//addVC?.selectedQuote = sender as! Quote
+		if segue.destination is EditViewController {
+			let editVC = segue.destination as? EditViewController
+			editVC?.selectedQuote = selectedQuote
+			editVC?.selectedQuoteInfo = selectedQuoteInfo
 		}
 	}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+	// TODO: LOAD IN PAGE NUM
+	
+	func loadQuoteInfoData() {
+		var docID = ""
+		docID = selectedQuote.docID
+		var medium = ""
+		var char = ""
+		var pageNum = ""
+		let fstore = Firestore.firestore()
+		var ref: DocumentReference? = nil
+		
+		ref = fstore.collection("quotes-info").document("info-\(docID)")
+		ref?.getDocument { (document, err) in
+			if let document = document, document.exists {
+				medium = document.data()?["medium"] as? String ?? ""
+				char = document.data()?["char"] as? String ?? ""
+				pageNum = document.data()?["pageNum"] as? String ?? ""
+				self.selectedQuoteInfo = QuoteInfo(medium: medium, char: char, pageNum: pageNum)
+				print("detailQuotes: \(self.selectedQuoteInfo)")
+				self.setDetailLabels()
+			} else {
+				print("detailQuotes: Document does not exist")
+			}
+		}
+	}
+	
+	func setDetailLabels() {
+		quoteLabel.text = selectedQuote.quote
+		sourceLabel.text = selectedQuote.source
+		mediumLabel.text = selectedQuoteInfo?.medium
+		charLabel.text = selectedQuoteInfo?.char
+		pageLabel.text = selectedQuoteInfo?.pageNum
+	}
 
 }

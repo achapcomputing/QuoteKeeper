@@ -12,24 +12,18 @@ class Quote: NSObject {
 	
 	var quote: String
 	var source: String?
+	var docID: String
 	
-	init(quote: String, source: String) {
+	init(quote: String, source: String, docID: String) {
 		self.quote = quote
 		self.source = source
+		self.docID = docID
 	}
 	
 	override init() {
 		self.quote = "quote"
 		self.source = "source"
+		self.docID = "docID"
 	}
 	
-}
-
-extension Quote {
-	
-	static var data: [Quote] {
-		let yoda = Quote(quote: "Do or do not; there is no try", source: "Yoda")
-		let darthV = Quote(quote: "I am your father", source: "Darth Vader")
-		return [yoda, darthV]
-	}
 }

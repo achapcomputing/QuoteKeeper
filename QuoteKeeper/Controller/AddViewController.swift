@@ -59,28 +59,20 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 	}
 	
 	
-	@IBOutlet weak var dateLabel: UILabel!
-	
-	// shares the quote and source
-	@IBAction func shareQuote(_ sender: Any) {
-		let activityViewController = UIActivityViewController(activityItems: [textView.text!, sourceLabel.text!], applicationActivities: nil)
-		present(activityViewController, animated: true, completion: nil)
-	}
-	
 	var quoteInfo = QuoteInfo()
 	///var quote = Quote()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		addDate()
-		//updateInfo()
+		//addDate()
 		sourceText.delegate = self
 		pageText.delegate = self
 		titleText.delegate = self
 		
-		if quoteInfo.title != "title" {
-			titleLabel.text = quoteInfo.title
-			pageLabel.text = quoteInfo.pageNum
+		if quoteInfo.medium != "medium" {
+			titleLabel.text = quoteInfo.medium
+			characterLabel.text = quoteInfo.char
+			pageLabel.text = quoteInfo.pageNum as! String
 		}
 	}
 	
@@ -103,7 +95,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 		return false
 	}
 
-	// gets current date for when quote was added
+	/* gets current date for when quote was added
 	func addDate() {
 		let date = Date() // gets current date
 		let format = DateFormatter()
@@ -111,7 +103,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 		let formattedDate = format.string(from: date) // formats the date
 		dateLabel.text = "Date Added: \(formattedDate)" // sets label in UI
 	}
-	
+	*/
 
 	
 }
