@@ -37,6 +37,9 @@ class DetailViewController: UIViewController {
 			editVC?.selectedQuoteInfo = selectedQuoteInfo
 		}
 	}
+	
+	// for editVC cancelling back to detailVC
+	@IBAction func unwindToDetailVC(_ unwindSegue: UIStoryboardSegue) { }
 
 	// TODO: LOAD IN PAGE NUM
 	

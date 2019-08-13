@@ -20,6 +20,10 @@ class EditViewController: UIViewController {
 	var selectedQuote: Quote? = Quote()
 	var selectedQuoteInfo: QuoteInfo? = QuoteInfo()
 	
+	@IBAction func cancelButtonTouched(_ sender: Any) {
+		performSegue(withIdentifier: "unwindSegueToDetailVC", sender: nil)
+	}
+	
 	@IBAction func saveButtonTouched(_ sender: Any) {
 		let quote = textView.text
 		let source = sourceTF.text
@@ -66,8 +70,6 @@ class EditViewController: UIViewController {
 		pageNumTF.text = selectedQuoteInfo?.pageNum
 	}
 	
-	
-	// UPDATE FIREBASE
 
     /*
     // MARK: - Navigation

@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class AllQuotesTableViewController: UITableViewController {
+class AllQuotesTableViewController: UITableViewController, UITabBarControllerDelegate {
 	
 	var allQuotes = [Quote]()
 	
@@ -49,35 +49,43 @@ class AllQuotesTableViewController: UITableViewController {
 		}
 	}
 	
-	// TODO: RELOAD QUOTES WHEN NEW QUOTE IS ADDED TO DATABASE
-	
 	func loadQuoteData() {
 		var quote = ""
 		var source = ""
 		var docID = ""
 		let fstore = Firestore.firestore()
 		var ref: CollectionReference? = nil
-		
 		ref = fstore.collection("quotes")
-		ref?.getDocuments() { (querySnapshot, err) in
-			if let err = err {
-				print("Error getting documents: \(err)")
-			} else {
-				for document in querySnapshot!.documents {
-					print("\(document.documentID) => \(document.data())")
-					quote = document.data()["quote"] as! String
-					source = document.data()["source"] as! String
-					docID = document.documentID
-					var newQuote: Quote
-					newQuote = Quote(quote: quote, source: source, docID: docID)
+		ref?.addSnapshotListener({ (snapshot, error) in
+			guard (snapshot?.documents) != nil else {
+				print("Error fetching documents: \(error!)")
+				return
+			}
+			snapshot?.documentChanges.forEach { diff in
+				// from addVC
+				if (diff.type == .added) {
+					print("New quote: \(diff.document.documentID) => \(diff.document.data())")
+					quote = diff.document.data()["quote"] as! String
+					source = diff.document.data()["source"] as! String
+					docID = diff.document.documentID
+					let newQuote = Quote(quote: quote, source: source, docID: docID)
 					self.allQuotes.append(newQuote)
+					// print all quotes in allQuotes array to console
+					for element in self.allQuotes {
+						print("allQuotes: \(element.quote) and \(element.source ?? "") and \(element.docID)")
+					}
+					self.tableView.reloadData() // reloads table view, so data is displayed in cells
 				}
-				for element in self.allQuotes {
-					print("allQuotes: \(element.quote) and \(element.source ?? "") and \(element.docID)")
+				// from editVC
+				if (diff.type == .modified) {
+					print("Modified quote: \(diff.document.data())")
+				}
+				// from allQuotesVC or detailVC
+				if (diff.type == .removed) {
+					print("Removed quote: \(diff.document.data())")
 				}
 			}
-			self.tableView.reloadData()
-		}
+		})
 	}
 	
 	
@@ -128,17 +136,3 @@ class AllQuotesTableViewController: UITableViewController {
     */
 
 }
-
-/*
-class UserCell: UITableViewCell {
-	
-	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-		super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-	}
-	
-	required init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
-	
-}
-*/

@@ -21,6 +21,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 	@IBOutlet weak var titleText: UITextField!
 	@IBOutlet weak var characterLabel: UILabel!
 	@IBOutlet weak var characterText: UITextField!
+	@IBOutlet weak var dateLabel: UILabel!
 	
 	@IBAction func saveButtonTouched(_ sender: Any) {
 		
@@ -40,6 +41,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 				print("Error adding document: \(err)")
 			} else {
 				docID = ref!.documentID
+				ref!.updateData(["docID" : docID])
 				print("quote document added with ID: \(docID)")
 				
 				// Add the extra info about the quote
@@ -55,16 +57,11 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 		print("Saved")
 	}
 	
-	@IBAction func presetButtonTouch(_ sender: Any) {
-	}
-	
-	
+	var quote = Quote()
 	var quoteInfo = QuoteInfo()
-	///var quote = Quote()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		//addDate()
 		sourceText.delegate = self
 		pageText.delegate = self
 		titleText.delegate = self
@@ -72,19 +69,9 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 		if quoteInfo.medium != "medium" {
 			titleLabel.text = quoteInfo.medium
 			characterLabel.text = quoteInfo.char
-			pageLabel.text = quoteInfo.pageNum as! String
+			pageLabel.text = quoteInfo.pageNum
 		}
 	}
-	
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		view.endEditing(true)
@@ -94,16 +81,5 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 		view.endEditing(true)
 		return false
 	}
-
-	/* gets current date for when quote was added
-	func addDate() {
-		let date = Date() // gets current date
-		let format = DateFormatter()
-		format.dateFormat = "MM/dd/yy" // determines the date format
-		let formattedDate = format.string(from: date) // formats the date
-		dateLabel.text = "Date Added: \(formattedDate)" // sets label in UI
-	}
-	*/
-
 	
 }
