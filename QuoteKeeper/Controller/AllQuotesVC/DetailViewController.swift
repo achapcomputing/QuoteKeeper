@@ -17,13 +17,33 @@ class DetailViewController: UIViewController {
 	@IBOutlet weak var charLabel: UILabel!
 	@IBOutlet weak var pageLabel: UILabel!
 	
+	@IBAction func deleteButtonTouched(_ sender: Any) {
+		let fstore = Firestore.firestore()
+		print("delete button touched")
+		fstore.collection("quotes").document(selectedDocID).delete() { err in
+			if let err = err {
+				print("Error removing document: \(err)")
+			} else {
+				print("Document \(self.selectedDocID) successfully removed!")
+			}
+		}
+		fstore.collection("quotes-info").document("info-\(selectedDocID)").delete() { err in
+			if let err = err {
+				print("Error removing document: \(err)")
+			} else {
+				print("Document info-\(self.selectedDocID) successfully removed!")
+			}
+		}
+	}
+	
 	@IBAction func shareButtonTouched(_ sender: Any) {
 		let activityViewController = UIActivityViewController(activityItems: [quoteLabel.text!, "by",  sourceLabel.text ?? ""], applicationActivities: nil)
 		present(activityViewController, animated: true, completion: nil)
 	}
-	
+
 	var selectedQuote: Quote = Quote()
 	var selectedQuoteInfo: QuoteInfo? = QuoteInfo()
+	var selectedDocID: String = String()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,31 +55,27 @@ class DetailViewController: UIViewController {
 			let editVC = segue.destination as? EditViewController
 			editVC?.selectedQuote = selectedQuote
 			editVC?.selectedQuoteInfo = selectedQuoteInfo
+			editVC?.selectedDocID = selectedDocID
 		}
 	}
-	
-	// for editVC cancelling back to detailVC
-	@IBAction func unwindToDetailVC(_ unwindSegue: UIStoryboardSegue) { }
-
 	// TODO: LOAD IN PAGE NUM
 	
 	func loadQuoteInfoData() {
-		var docID = ""
-		docID = selectedQuote.docID
+		selectedDocID = selectedQuote.docID
 		var medium = ""
 		var char = ""
 		var pageNum = ""
 		let fstore = Firestore.firestore()
 		var ref: DocumentReference? = nil
 		
-		ref = fstore.collection("quotes-info").document("info-\(docID)")
+		ref = fstore.collection("quotes-info").document("info-\(selectedDocID)")
 		ref?.getDocument { (document, err) in
 			if let document = document, document.exists {
 				medium = document.data()?["medium"] as? String ?? ""
 				char = document.data()?["char"] as? String ?? ""
-				pageNum = document.data()?["pageNum"] as? String ?? ""
+				pageNum = document.data()?["page-num"] as? String ?? ""
 				self.selectedQuoteInfo = QuoteInfo(medium: medium, char: char, pageNum: pageNum)
-				print("detailQuotes: \(self.selectedQuoteInfo)")
+				print("detailQuotes: \(String(describing: self.selectedQuoteInfo))")
 				self.setDetailLabels()
 			} else {
 				print("detailQuotes: Document does not exist")

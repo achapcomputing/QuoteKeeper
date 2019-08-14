@@ -49,7 +49,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 					if let err = err {
 						print("Error adding document: \(err)")
 					} else {
-						print("quotes-info document added with ID: \(docID)")
+						print("quotes-info document added with ID: info-\(docID)")
 					}
 				}
 			}

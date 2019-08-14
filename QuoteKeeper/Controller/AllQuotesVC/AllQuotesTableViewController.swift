@@ -11,7 +11,8 @@ import Firebase
 
 class AllQuotesTableViewController: UITableViewController, UITabBarControllerDelegate {
 	
-	var allQuotes = [Quote]()
+	var allQuotes = [String : Quote]()
+	var allQuotesArray = [Quote]()
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,23 +30,23 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-		cell.textLabel?.text = allQuotes[indexPath.row].quote // shows quote in each cell
-		cell.detailTextLabel?.text = allQuotes[indexPath.row].source // adds source to each cell
-		print("cellQuotes: \(allQuotes[indexPath.row].quote)")
-        return cell
+		cell.textLabel?.text = allQuotesArray[indexPath.row].quote // shows quote in each cell
+		cell.detailTextLabel?.text = allQuotesArray[indexPath.row].source // adds source to each cell
+		print("cellQuotes: \(allQuotesArray[indexPath.row].quote)")
+		return cell
     }
-	
-	var segueIdentifiers = ["detailSegue", "editSegue"]
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
-		performSegue(withIdentifier: "detailSegue", sender: allQuotes[indexPath.row])
+		performSegue(withIdentifier: "detailSegue", sender: allQuotesArray[indexPath.row])
+		print("allToDetailSegueSelectedQuote: \(allQuotesArray[indexPath.row])")
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.destination is DetailViewController {
 			let detailVC = segue.destination as? DetailViewController
 			detailVC?.selectedQuote = sender as! Quote
+			print("selectedQuote: \(detailVC?.selectedQuote)")
 		}
 	}
 	
@@ -54,85 +55,65 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 		var source = ""
 		var docID = ""
 		let fstore = Firestore.firestore()
-		var ref: CollectionReference? = nil
-		ref = fstore.collection("quotes")
-		ref?.addSnapshotListener({ (snapshot, error) in
+		fstore.collection("quotes").addSnapshotListener({ (snapshot, error) in
 			guard (snapshot?.documents) != nil else {
 				print("Error fetching documents: \(error!)")
 				return
-			}
+			}				
 			snapshot?.documentChanges.forEach { diff in
-				// from addVC
+				// when loading screen
 				if (diff.type == .added) {
 					print("New quote: \(diff.document.documentID) => \(diff.document.data())")
 					quote = diff.document.data()["quote"] as! String
 					source = diff.document.data()["source"] as! String
 					docID = diff.document.documentID
 					let newQuote = Quote(quote: quote, source: source, docID: docID)
-					self.allQuotes.append(newQuote)
+					self.allQuotes[docID] = newQuote
+					//self.allQuotesArray.append(newQuote)
 					// print all quotes in allQuotes array to console
-					for element in self.allQuotes {
-						print("allQuotes: \(element.quote) and \(element.source ?? "") and \(element.docID)")
+					for (docID, quote) in self.allQuotes {
+						print("newQuotes: \(String(describing: self.allQuotes[docID]?.quote)) and \(quote.source ?? "")")
 					}
-					self.tableView.reloadData() // reloads table view, so data is displayed in cells
+					for element in self.allQuotesArray {
+						print("newQuotesArray: \(element.quote) and \(element.source)")
+					}
 				}
-				// from editVC
+				// from addVC or editVC
 				if (diff.type == .modified) {
-					print("Modified quote: \(diff.document.data())")
+					print("Modified quote: \(diff.document.documentID) => \(diff.document.data())")
+					quote = diff.document.data()["quote"] as! String
+					source = diff.document.data()["source"] as! String
+					docID = diff.document.documentID
+					let modQuote = Quote(quote: quote, source: source, docID: docID)
+					self.allQuotes[docID] = modQuote
+					//self.allQuotesArray.append(modQuote)
+					// print all quotes in allQuotes array to console
+					for (docID, quote) in self.allQuotes {
+						print("modifiedQuotes: \(quote.quote) and \(quote.source)")
+					}
 				}
 				// from allQuotesVC or detailVC
 				if (diff.type == .removed) {
-					print("Removed quote: \(diff.document.data())")
+					print("Removed quote: \(diff.document.documentID) => \(diff.document.data())")
+					docID = diff.document.documentID
+					self.allQuotes.removeValue(forKey: docID)
+					// print all quotes in allQuotes array to console
+					for (docID, quote) in self.allQuotes {
+						print("removedQuotes: \(self.allQuotes[docID]?.quote) and \(self.allQuotes[docID]?.source ?? "")")
+					}
 				}
 			}
+			// runs every update
+			self.allQuotesArray = [] // empties allQuotesArray
+			for (ID, _) in self.allQuotes {
+				self.allQuotesArray.append(self.allQuotes[ID] ?? Quote()) // adds updated quotes to array for cell display
+			}
+			self.tableView.reloadData()
 		})
 	}
 	
-	
+	// for editVC cancelling back to allQuotesVC
+	@IBAction func unwindToAllQuotesVC(_ unwindSegue: UIStoryboardSegue) { }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

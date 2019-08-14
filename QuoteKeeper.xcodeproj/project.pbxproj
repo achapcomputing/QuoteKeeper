@@ -11,6 +11,7 @@
 		DC4908C922FB60C7005243BF /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4908C822FB60C7005243BF /* EditViewController.swift */; };
 		DC4908CE22FD145B005243BF /* CopyPaste.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4908CD22FD145B005243BF /* CopyPaste.swift */; };
 		DC50E66922FB2DC60012DBD3 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50E66822FB2DC60012DBD3 /* Quote.swift */; };
+		DC8528D023034C1B00575C17 /* AllQuotesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8528CF23034C1B00575C17 /* AllQuotesCollectionViewController.swift */; };
 		DCCDE2C922E68A2200C451CF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCDE2C822E68A2200C451CF /* DetailViewController.swift */; };
 		DCCDE2CB22E69FD100C451CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DCCDE2CA22E69FD000C451CF /* GoogleService-Info.plist */; };
 		DCCDE2CD22E7A5AD00C451CF /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCDE2CC22E7A5AD00C451CF /* AccountViewController.swift */; };
@@ -29,6 +30,7 @@
 		DC4908C822FB60C7005243BF /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		DC4908CD22FD145B005243BF /* CopyPaste.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyPaste.swift; sourceTree = "<group>"; };
 		DC50E66822FB2DC60012DBD3 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
+		DC8528CF23034C1B00575C17 /* AllQuotesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllQuotesCollectionViewController.swift; sourceTree = "<group>"; };
 		DCCDE2C822E68A2200C451CF /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		DCCDE2CA22E69FD000C451CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DCCDE2CC22E7A5AD00C451CF /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				DCE6FD3A22E55A77009BAF77 /* AllQuotesTableViewController.swift */,
 				DCCDE2C822E68A2200C451CF /* DetailViewController.swift */,
 				DC4908C822FB60C7005243BF /* EditViewController.swift */,
+				DC8528CF23034C1B00575C17 /* AllQuotesCollectionViewController.swift */,
 			);
 			path = AllQuotesVC;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				DC4908C922FB60C7005243BF /* EditViewController.swift in Sources */,
 				DCE6FD3922E55740009BAF77 /* QuoteInfo.swift in Sources */,
 				DCE6FD3B22E55A78009BAF77 /* AllQuotesTableViewController.swift in Sources */,
+				DC8528D023034C1B00575C17 /* AllQuotesCollectionViewController.swift in Sources */,
 				DCCDE2C922E68A2200C451CF /* DetailViewController.swift in Sources */,
 				DCCDE2CD22E7A5AD00C451CF /* AccountViewController.swift in Sources */,
 				DCCF83A322E5212500E767B2 /* AppDelegate.swift in Sources */,

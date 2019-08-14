@@ -19,15 +19,15 @@ class EditViewController: UIViewController {
 	
 	var selectedQuote: Quote? = Quote()
 	var selectedQuoteInfo: QuoteInfo? = QuoteInfo()
+	var selectedDocID: String = ""
 	
 	@IBAction func cancelButtonTouched(_ sender: Any) {
-		performSegue(withIdentifier: "unwindSegueToDetailVC", sender: nil)
+		performSegue(withIdentifier: "unwindSegueToAllQuotesVC", sender: nil)
 	}
 	
 	@IBAction func saveButtonTouched(_ sender: Any) {
 		let quote = textView.text
 		let source = sourceTF.text
-		let docID = selectedQuote?.docID
 		let medium = mediumTF.text
 		let char = charTF.text
 		let pageNum = pageNumTF.text
@@ -36,19 +36,19 @@ class EditViewController: UIViewController {
 		var ref: DocumentReference? = nil
 		
 		// updates quotes collection
-		ref = fstore.collection("quotes").document(docID!)
+		ref = fstore.collection("quotes").document(selectedDocID)
 		ref?.setData(["quote" : quote ?? "", "source" : source ?? ""], merge: true) { err in
 			if let err = err {
 				print("Error updating document: \(err)")
 			} else {
-				print("quote document updated with ID: \(docID!)")
+				print("quote document updated with ID: \(self.selectedDocID)")
 				
 				// updates quotes-info collection
-				fstore.collection("quotes-info").document("info-\(docID!)").setData(["medium" : medium ?? "", "char" : char ?? "", "page-num" : pageNum ?? ""]) { err in
+				fstore.collection("quotes-info").document("info-\(self.selectedDocID)").setData(["medium" : medium ?? "", "char" : char ?? "", "page-num" : pageNum ?? ""]) { err in
 					if let err = err {
 						print("Error updating document: \(err)")
 					} else {
-						print("quotes-info document updated with ID: \(docID!)")
+						print("quotes-info document updated with ID: \(self.selectedDocID)")
 					}
 				}
 			}
@@ -57,7 +57,7 @@ class EditViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		print("editQuotes: \(selectedQuote?.quote)")
+		print("editQuotes: \(String(describing: selectedQuote?.quote))")
         // Do any additional setup after loading the view.
 		setEditLabels()
     }
