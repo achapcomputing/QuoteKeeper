@@ -9,14 +9,32 @@
 import UIKit
 import Firebase
 
-class AllQuotesTableViewController: UITableViewController, UITabBarControllerDelegate {
+class AllQuotesTableViewController: UITableViewController, UITabBarControllerDelegate, UISearchBarDelegate {
 	
 	var allQuotes = [String : Quote]()
 	var allQuotesArray = [Quote]()
+	var filteredQuotes = [Quote]()
+	
+	var detailVC: DetailViewController? = nil
+	let searchController = UISearchController(searchResultsController: nil)
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		loadQuoteData()
+		
+		searchController.searchBar.delegate = self
+		searchController.searchResultsUpdater = self as? UISearchResultsUpdating
+		searchController.obscuresBackgroundDuringPresentation = false
+		searchController.searchBar.placeholder = "Search Quotes"
+		navigationItem.searchController = searchController
+		definesPresentationContext = true
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		if let selectionIndexPath = self.tableView.indexPathForSelectedRow {
+			self.tableView.deselectRow(at: selectionIndexPath, animated: animated)
+		}
+		super.viewWillAppear(animated)
 	}
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -25,20 +43,35 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		print("Tableview setup \(allQuotes.count)")
+		if isFiltering() {
+			return filteredQuotes.count
+		}
         return allQuotes.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-		cell.textLabel?.text = allQuotesArray[indexPath.row].quote // shows quote in each cell
-		cell.detailTextLabel?.text = allQuotesArray[indexPath.row].source // adds source to each cell
+		let quote: Quote
+		
+		if isFiltering() {
+			quote = filteredQuotes[indexPath.row]
+		} else {
+			quote = allQuotesArray[indexPath.row]
+		}
+		
+		cell.textLabel?.text = quote.quote // shows quote in each cell
+		cell.detailTextLabel?.text = quote.source // adds source to each cell
 		print("cellQuotes: \(allQuotesArray[indexPath.row].quote)")
 		return cell
     }
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
-		performSegue(withIdentifier: "detailSegue", sender: allQuotesArray[indexPath.row])
+		if isFiltering() {
+			performSegue(withIdentifier: "detailSegue", sender: filteredQuotes[indexPath.row])
+		} else {
+			performSegue(withIdentifier: "detailSegue", sender: allQuotesArray[indexPath.row])
+		}
 		print("allToDetailSegueSelectedQuote: \(allQuotesArray[indexPath.row])")
 	}
 	
@@ -115,5 +148,27 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 	// for editVC cancelling back to allQuotesVC
 	@IBAction func unwindToAllQuotesVC(_ unwindSegue: UIStoryboardSegue) { }
 
+	// MARK: - Search Functions
+	func searchBarIsEmpty() -> Bool {
+		return searchController.searchBar.text?.isEmpty ?? true
+	}
+	
+	func filteredContentForSearchText(_ searchText: String, scope: String = "All") {
+		// filters candies array based on searchText and stores reults in filteredCandies array
+		filteredQuotes = allQuotesArray.filter({( quote : Quote) -> Bool in
+			return quote.quote.lowercased().contains(searchText.lowercased()) // only compare lowercased array items and searchText inputs
+		})
+		tableView.reloadData()
+	}
+	
+	func isFiltering() -> Bool {
+		return searchController.isActive && !searchBarIsEmpty()
+	}
 
+}
+
+extension AllQuotesTableViewController: UISearchResultsUpdating {
+	func updateSearchResults(for searchController: UISearchController) {
+		filteredContentForSearchText(searchController.searchBar.text!)
+	}
 }
