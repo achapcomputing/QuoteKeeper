@@ -21,6 +21,8 @@
 		DCCF83B522E5233F00E767B2 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCF83B422E5233F00E767B2 /* AddViewController.swift */; };
 		DCE6FD3922E55740009BAF77 /* QuoteInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FD3822E55740009BAF77 /* QuoteInfo.swift */; };
 		DCE6FD3B22E55A78009BAF77 /* AllQuotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FD3A22E55A77009BAF77 /* AllQuotesTableViewController.swift */; };
+		DD29B28923FF7BC500178330 /* SearchQuotesTableViewController copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD29B28823FF7BC500178330 /* SearchQuotesTableViewController copy.swift */; };
+		DD2F8D202425264E00573416 /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = DD2F8D1F2425264E00573416 /* Notes */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		DCCF83B422E5233F00E767B2 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		DCE6FD3822E55740009BAF77 /* QuoteInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteInfo.swift; sourceTree = "<group>"; };
 		DCE6FD3A22E55A77009BAF77 /* AllQuotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllQuotesTableViewController.swift; sourceTree = "<group>"; };
+		DD29B28823FF7BC500178330 /* SearchQuotesTableViewController copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchQuotesTableViewController copy.swift"; sourceTree = "<group>"; };
+		DD2F8D1F2425264E00573416 /* Notes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notes; sourceTree = "<group>"; };
 		E5814E1DFB98A064493F4B0A /* Pods-QuoteKeeper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuoteKeeper.debug.xcconfig"; path = "Target Support Files/Pods-QuoteKeeper/Pods-QuoteKeeper.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				DC4908CC22FB6100005243BF /* AllQuotesVC */,
+				DD29B28823FF7BC500178330 /* SearchQuotesTableViewController copy.swift */,
 				DCCF83B422E5233F00E767B2 /* AddViewController.swift */,
 				DCCDE2CC22E7A5AD00C451CF /* AccountViewController.swift */,
 			);
@@ -115,6 +120,7 @@
 				DCCF83AE22E5212700E767B2 /* Info.plist */,
 				DCCDE2CA22E69FD000C451CF /* GoogleService-Info.plist */,
 				DC4908CD22FD145B005243BF /* CopyPaste.swift */,
+				DD2F8D1F2425264E00573416 /* Notes */,
 			);
 			path = QuoteKeeper;
 			sourceTree = "<group>";
@@ -198,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCCF83AD22E5212700E767B2 /* LaunchScreen.storyboard in Resources */,
+				DD2F8D202425264E00573416 /* Notes in Resources */,
 				DCCDE2CB22E69FD100C451CF /* GoogleService-Info.plist in Resources */,
 				DCCF83AA22E5212700E767B2 /* Assets.xcassets in Resources */,
 				DCCF83A822E5212500E767B2 /* Main.storyboard in Resources */,
@@ -270,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD29B28923FF7BC500178330 /* SearchQuotesTableViewController copy.swift in Sources */,
 				DC4908C922FB60C7005243BF /* EditViewController.swift in Sources */,
 				DCE6FD3922E55740009BAF77 /* QuoteInfo.swift in Sources */,
 				DCE6FD3B22E55A78009BAF77 /* AllQuotesTableViewController.swift in Sources */,

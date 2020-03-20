@@ -16,8 +16,10 @@ class EditViewController: UIViewController {
 	@IBOutlet weak var mediumTF: UITextField!
 	@IBOutlet weak var charTF: UITextField!
 	@IBOutlet weak var pageNumTF: UITextField!
-	
-	var selectedQuote: Quote? = Quote()
+    @IBOutlet weak var notesView: UITextView!
+    
+    
+    var selectedQuote: Quote? = Quote()
 	var selectedQuoteInfo: QuoteInfo? = QuoteInfo()
 	var selectedDocID: String = ""
 	
@@ -31,6 +33,7 @@ class EditViewController: UIViewController {
 		let medium = mediumTF.text
 		let char = charTF.text
 		let pageNum = pageNumTF.text
+        let notes = notesView.text
 		
 		let fstore = Firestore.firestore()
 		var ref: DocumentReference? = nil
@@ -44,7 +47,7 @@ class EditViewController: UIViewController {
 				print("quote document updated with ID: \(self.selectedDocID)")
 				
 				// updates quotes-info collection
-				fstore.collection("quotes-info").document("info-\(self.selectedDocID)").setData(["medium" : medium ?? "", "char" : char ?? "", "page-num" : pageNum ?? ""]) { err in
+                fstore.collection("quotes-info").document("info-\(self.selectedDocID)").setData(["medium" : medium ?? "", "char" : char ?? "", "page-num" : pageNum ?? "", "notes" : notes ?? ""]) { err in
 					if let err = err {
 						print("Error updating document: \(err)")
 					} else {
@@ -53,6 +56,8 @@ class EditViewController: UIViewController {
 				}
 			}
 		}
+        
+        // performSegue(withIdentifier: "unwindSegueToAllQuotesVC", sender: nil)
 	}
 	
     override func viewDidLoad() {
@@ -68,6 +73,7 @@ class EditViewController: UIViewController {
 		mediumTF.text = selectedQuoteInfo?.medium
 		charTF.text = selectedQuoteInfo?.char
 		pageNumTF.text = selectedQuoteInfo?.pageNum
+        notesView.text = selectedQuoteInfo?.notes
 	}
 	
 

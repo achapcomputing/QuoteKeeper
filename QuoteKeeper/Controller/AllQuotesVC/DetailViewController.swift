@@ -16,7 +16,8 @@ class DetailViewController: UIViewController {
 	@IBOutlet weak var mediumLabel: UILabel!
 	@IBOutlet weak var charLabel: UILabel!
 	@IBOutlet weak var pageLabel: UILabel!
-	
+    @IBOutlet weak var notesLabel: UILabel!
+    
 	@IBAction func deleteButtonTouched(_ sender: Any) {
 		let fstore = Firestore.firestore()
 		print("delete button touched")
@@ -58,13 +59,13 @@ class DetailViewController: UIViewController {
 			editVC?.selectedDocID = selectedDocID
 		}
 	}
-	// TODO: LOAD IN PAGE NUM
 	
 	func loadQuoteInfoData() {
 		selectedDocID = selectedQuote.docID
 		var medium = ""
 		var char = ""
 		var pageNum = ""
+        var notes = ""
 		let fstore = Firestore.firestore()
 		var ref: DocumentReference? = nil
 		
@@ -74,8 +75,8 @@ class DetailViewController: UIViewController {
 				medium = document.data()?["medium"] as? String ?? ""
 				char = document.data()?["char"] as? String ?? ""
 				pageNum = document.data()?["page-num"] as? String ?? ""
-				self.selectedQuoteInfo = QuoteInfo(medium: medium, char: char, pageNum: pageNum)
-				print("detailQuotes: \(String(describing: self.selectedQuoteInfo))")
+                notes = document.data()?["notes"] as? String ?? ""
+                self.selectedQuoteInfo = QuoteInfo(medium: medium, char: char, pageNum: pageNum, notes: notes)
 				self.setDetailLabels()
 			} else {
 				print("detailQuotes: Document does not exist")
@@ -89,6 +90,7 @@ class DetailViewController: UIViewController {
 		mediumLabel.text = selectedQuoteInfo?.medium
 		charLabel.text = selectedQuoteInfo?.char
 		pageLabel.text = selectedQuoteInfo?.pageNum
+        notesLabel.text = selectedQuoteInfo?.notes
 	}
 
 }

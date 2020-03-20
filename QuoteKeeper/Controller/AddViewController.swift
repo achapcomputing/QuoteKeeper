@@ -21,9 +21,10 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 	@IBOutlet weak var titleText: UITextField!
 	@IBOutlet weak var characterLabel: UILabel!
 	@IBOutlet weak var characterText: UITextField!
-	@IBOutlet weak var dateLabel: UILabel!
-	
-	@IBAction func saveButtonTouched(_ sender: Any) {
+    @IBOutlet weak var notesLabel: UILabel!
+    @IBOutlet weak var notesText: UITextView!
+    
+    @IBAction func saveButtonTouched(_ sender: Any) {
 		
 		let quote = textView.text
 		let source = sourceText.text
@@ -31,6 +32,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 		let medium = titleText.text
 		let char = characterText.text
 		let pageNum = pageText.text
+        let notes = notesText.text
 		
 		let fstore = Firestore.firestore()
 		var ref: DocumentReference? = nil
@@ -45,7 +47,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 				print("quote document added with ID: \(docID)")
 				
 				// Add the extra info about the quote
-				fstore.collection("quotes-info").document("info-\(docID)").setData(["medium" : medium ?? "", "char" : char ?? "", "page-num" : pageNum ?? ""]) { err in
+                fstore.collection("quotes-info").document("info-\(docID)").setData(["medium" : medium ?? "", "char" : char ?? "", "page-num" : pageNum ?? "", "notes" : notes ?? ""]) { err in
 					if let err = err {
 						print("Error adding document: \(err)")
 					} else {
@@ -70,6 +72,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 			titleLabel.text = quoteInfo.medium
 			characterLabel.text = quoteInfo.char
 			pageLabel.text = quoteInfo.pageNum
+            notesLabel.text = quoteInfo.notes
 		}
 	}
 	

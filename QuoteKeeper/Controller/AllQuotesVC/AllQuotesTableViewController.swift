@@ -17,6 +17,8 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 	
 	var detailVC: DetailViewController? = nil
 	let searchController = UISearchController(searchResultsController: nil)
+    //TODO: add search database button for all quotes VC
+    // let searchDBButton = UIButton(type: UIButton.ButtonType)
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +27,7 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 		searchController.searchBar.delegate = self
 		searchController.searchResultsUpdater = self as? UISearchResultsUpdating
 		searchController.obscuresBackgroundDuringPresentation = false
-		searchController.searchBar.placeholder = "Search Quotes"
+		searchController.searchBar.placeholder = "Search Your Quotes"
 		navigationItem.searchController = searchController
 		definesPresentationContext = true
 	}
