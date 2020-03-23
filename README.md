@@ -13,3 +13,8 @@ Future features:
 - read a photo of a book page and save the text
 
 I need to finish the user login system and fix the UI. Then, testing. Then, I will submit to the Apple App Store. My goal is to submit by summer 2020.
+
+App Prototype:
+https://www.figma.com/file/hCfiXeZsqDA2L29OEYaORu/QuoteKeeper?node-id=0%3A1
+App Icon:
+https://www.figma.com/file/DZYuKLIhL1DXVZXgYczNQM/QK-App-Icon
