@@ -16,5 +16,6 @@ I need to finish the user login system and fix the UI. Then, testing. Then, I wi
 
 App Prototype:
 https://www.figma.com/file/hCfiXeZsqDA2L29OEYaORu/QuoteKeeper?node-id=0%3A1
+
 App Icon:
 https://www.figma.com/file/DZYuKLIhL1DXVZXgYczNQM/QK-App-Icon
