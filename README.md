@@ -1,6 +1,6 @@
 # QuoteKeeper
 
-QuoteKeeper has two main use cases I am designed it for:
+QuoteKeeper has two main use cases I am desigining it for:
 1)  documenting the funny things your friends say
 2)  storing movie/book quotes that speak to you
 
@@ -12,3 +12,4 @@ Future features:
 - searchable database: searches all the book/movie quotes saved, searches all your friends' quotes from friends
 - read a photo of a book page and save the text
 
+I need to finish the user login system and fix the UI. Then, testing. Then, I will submit to the Apple App Store. My goal is to submit by summer 2020.
