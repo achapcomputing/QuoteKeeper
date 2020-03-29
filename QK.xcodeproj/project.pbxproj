@@ -18,6 +18,7 @@
 		DC1442CB24301EDE00837132 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1442CA24301EDE00837132 /* Quote.swift */; };
 		DC1442CD243025E300837132 /* quoteData.json in Resources */ = {isa = PBXBuildFile; fileRef = DC1442CC243025E300837132 /* quoteData.json */; };
 		DC1442CF2430272700837132 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1442CE2430272700837132 /* Data.swift */; };
+		DD8E1D3E243040CB00734185 /* QuoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8E1D3D243040CB00734185 /* QuoteList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		DC1442CA24301EDE00837132 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		DC1442CC243025E300837132 /* quoteData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = quoteData.json; sourceTree = "<group>"; };
 		DC1442CE2430272700837132 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		DD8E1D3D243040CB00734185 /* QuoteList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,9 +71,10 @@
 				DC1442B22430166000837132 /* AppDelegate.swift */,
 				DC1442CE2430272700837132 /* Data.swift */,
 				DC1442CC243025E300837132 /* quoteData.json */,
-				DC1442CA24301EDE00837132 /* Quote.swift */,
+				DD8E1D3C243037E600734185 /* Models */,
 				DC1442C824301DF600837132 /* QuoteDetail.swift */,
 				DC1442C624301D3500837132 /* QuoteRow.swift */,
+				DD8E1D3D243040CB00734185 /* QuoteList.swift */,
 				DC1442B42430166000837132 /* SceneDelegate.swift */,
 				DC1442B62430166000837132 /* ContentView.swift */,
 				DC1442B82430166A00837132 /* Assets.xcassets */,
@@ -88,6 +91,14 @@
 				DC1442BB2430166A00837132 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DD8E1D3C243037E600734185 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DC1442CA24301EDE00837132 /* Quote.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,6 +177,7 @@
 				DC1442C724301D3500837132 /* QuoteRow.swift in Sources */,
 				DC1442B32430166000837132 /* AppDelegate.swift in Sources */,
 				DC1442C924301DF600837132 /* QuoteDetail.swift in Sources */,
+				DD8E1D3E243040CB00734185 /* QuoteList.swift in Sources */,
 				DC1442B52430166000837132 /* SceneDelegate.swift in Sources */,
 				DC1442CB24301EDE00837132 /* Quote.swift in Sources */,
 				DC1442B72430166000837132 /* ContentView.swift in Sources */,

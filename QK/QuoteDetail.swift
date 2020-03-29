@@ -14,12 +14,13 @@ struct QuoteDetail: View {
 	
     var body: some View {
 		
-		VStack {
+        VStack(alignment: .leading) {
 			
 			Text(quote.text)
 			Text(quote.source)
-			
-		}
+            
+        }
+        .navigationBarTitle(Text(quote.source), displayMode: .inline)
 		
     }
 }

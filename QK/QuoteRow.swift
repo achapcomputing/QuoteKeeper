@@ -15,14 +15,28 @@ struct QuoteRow: View {
     var body: some View {
         
 		HStack {
-			Text(quote.text)
-			Spacer()
+            
+            VStack(alignment: .leading) {
+                
+                Text(quote.text)
+                    .font(.body)
+                Text(quote.source)
+                    .font(.caption)
+                
+            }
+            .padding(7)
+                        
+            
+            Spacer()
 //			if quote.isFavorite {
 //				Image(systemName: "star.fill")
 //					.imageScale(.medium)
 //					.foregroundColor(.yellow)
 //			}
+            
 		}
+        //.border(Color.gray, width: 3)
+        
 		
     }
 	
@@ -30,6 +44,7 @@ struct QuoteRow: View {
 
 struct QuoteCell_Previews: PreviewProvider {
     static var previews: some View {
-		QuoteRow(quote: quoteData[0])
+		//QuoteRow()
+        QuoteRow(quote: quoteData[0])
     }
 }
