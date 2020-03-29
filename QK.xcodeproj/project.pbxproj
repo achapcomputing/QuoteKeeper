@@ -13,6 +13,11 @@
 		DC1442B92430166A00837132 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC1442B82430166A00837132 /* Assets.xcassets */; };
 		DC1442BC2430166A00837132 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC1442BB2430166A00837132 /* Preview Assets.xcassets */; };
 		DC1442BF2430166A00837132 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC1442BD2430166A00837132 /* LaunchScreen.storyboard */; };
+		DC1442C724301D3500837132 /* QuoteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1442C624301D3500837132 /* QuoteRow.swift */; };
+		DC1442C924301DF600837132 /* QuoteDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1442C824301DF600837132 /* QuoteDetail.swift */; };
+		DC1442CB24301EDE00837132 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1442CA24301EDE00837132 /* Quote.swift */; };
+		DC1442CD243025E300837132 /* quoteData.json in Resources */ = {isa = PBXBuildFile; fileRef = DC1442CC243025E300837132 /* quoteData.json */; };
+		DC1442CF2430272700837132 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1442CE2430272700837132 /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,11 @@
 		DC1442BB2430166A00837132 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DC1442BE2430166A00837132 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC1442C02430166A00837132 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC1442C624301D3500837132 /* QuoteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteRow.swift; sourceTree = "<group>"; };
+		DC1442C824301DF600837132 /* QuoteDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteDetail.swift; sourceTree = "<group>"; };
+		DC1442CA24301EDE00837132 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
+		DC1442CC243025E300837132 /* quoteData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = quoteData.json; sourceTree = "<group>"; };
+		DC1442CE2430272700837132 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +67,11 @@
 			isa = PBXGroup;
 			children = (
 				DC1442B22430166000837132 /* AppDelegate.swift */,
+				DC1442CE2430272700837132 /* Data.swift */,
+				DC1442CC243025E300837132 /* quoteData.json */,
+				DC1442CA24301EDE00837132 /* Quote.swift */,
+				DC1442C824301DF600837132 /* QuoteDetail.swift */,
+				DC1442C624301D3500837132 /* QuoteRow.swift */,
 				DC1442B42430166000837132 /* SceneDelegate.swift */,
 				DC1442B62430166000837132 /* ContentView.swift */,
 				DC1442B82430166A00837132 /* Assets.xcassets */,
@@ -135,6 +150,7 @@
 			files = (
 				DC1442BF2430166A00837132 /* LaunchScreen.storyboard in Resources */,
 				DC1442BC2430166A00837132 /* Preview Assets.xcassets in Resources */,
+				DC1442CD243025E300837132 /* quoteData.json in Resources */,
 				DC1442B92430166A00837132 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,8 +162,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC1442CF2430272700837132 /* Data.swift in Sources */,
+				DC1442C724301D3500837132 /* QuoteRow.swift in Sources */,
 				DC1442B32430166000837132 /* AppDelegate.swift in Sources */,
+				DC1442C924301DF600837132 /* QuoteDetail.swift in Sources */,
 				DC1442B52430166000837132 /* SceneDelegate.swift in Sources */,
+				DC1442CB24301EDE00837132 /* Quote.swift in Sources */,
 				DC1442B72430166000837132 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

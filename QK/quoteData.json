@@ -1,0 +1,17 @@
+
+[
+	{
+		"id": 001,
+		"text": "Do or do not; there is not try.",
+		"source": "George Lucas",
+		"medium": "Movie",
+		"isFavorite": false
+	},
+	{
+		"id": 002,
+		"text": "I am still learning how to go back and reread my own chapters without feeling like I want to set all of my pages on fire."
+		"souce": "EV Rogina",
+		"medium": "Quote",
+		"isFavorite": true
+	}
+]
