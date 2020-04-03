@@ -19,25 +19,23 @@ struct QuoteRow: View {
             VStack(alignment: .leading) {
                 
                 Text(quote.text)
-                    .font(.body)
+                    .fontWeight(.medium)
                 Text(quote.source)
                     .font(.caption)
                 
             }
-            .padding(7)
-                        
             
             Spacer()
-//			if quote.isFavorite {
-//				Image(systemName: "star.fill")
-//					.imageScale(.medium)
-//					.foregroundColor(.yellow)
-//			}
+			if quote.isFavorite {
+				Image(systemName: "star.fill")
+					.imageScale(.medium)
+					.foregroundColor(.yellow)
+			}
             
 		}
+        .padding(7)
         //.border(Color.gray, width: 3)
         
-		
     }
 	
 }
@@ -45,6 +43,6 @@ struct QuoteRow: View {
 struct QuoteCell_Previews: PreviewProvider {
     static var previews: some View {
 		//QuoteRow()
-        QuoteRow(quote: quoteData[0])
+        QuoteRow(quote: quoteData[1])
     }
 }

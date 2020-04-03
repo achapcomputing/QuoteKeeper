@@ -11,7 +11,7 @@ import CoreLocation
 import UIKit
 import SwiftUI
 
-let quoteData: [Quote] = load("quoteData.json")
+var quoteData: [Quote] = load("quoteData.json")
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data
