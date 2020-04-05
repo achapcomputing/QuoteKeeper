@@ -9,19 +9,26 @@
 import SwiftUI
 
 struct RootTabView: View {
+    
+    @State var selection = 1
+    
     var body: some View {
         
-        TabView {
+        TabView(selection: $selection) {
             QuoteList()
                 .tabItem {
                     Image(systemName: "text.quote")
                     Text("Quotes")
                 }
-            ProfileHost()
+                .tag(0)
+            //ProfileHost()
+            ProfileLogin()
+                .environmentObject(SessionStore())
                 .tabItem {
                     Image(systemName: "person.fill")
                     Text("Account")
                 }
+                .tag(1)
         }
         .accentColor(Color("Blue"))
         

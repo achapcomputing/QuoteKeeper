@@ -7,16 +7,61 @@
 //
 
 import UIKit
+import Firebase
+import GoogleSignIn
+import FBSDKCoreKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
+        FirebaseApp.configure()
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
 		return true
 	}
+    
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        // FB Handler
+        let handled = ApplicationDelegate.shared.application(
+            app,
+            open: url,
+            options: options)
+//            GIDSignIn.sharedInstance().handle(url)
+
+        return handled
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+      // ...
+      if let error = error {
+        print("Failed to login to Google: ", error)
+        return
+      }
+
+        print("Successfully logged into Google")
+        guard let idToken = user.authentication.idToken else { return }
+        guard let accessToken = user.authentication.accessToken else { return }
+        let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                       accessToken: accessToken)
+        Auth.auth().signIn(with: credential, completion: { (user, error) in
+          if let error = error {
+              print("Failed to create Firebase User with Google account: ", error)
+              return
+          }
+          guard let uid = user?.user.uid else { return }
+          print("Successfully logged into Firebase with Google ", uid)
+        })
+    }
+
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        // Perform any operations when the user disconnects from app here.
+        // ...
+    }
+
 
 	// MARK: UISceneSession Lifecycle
 

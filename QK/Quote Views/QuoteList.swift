@@ -60,6 +60,7 @@ struct QuoteList: View {
                             }
                         }
                         .onDelete(perform: delete)
+                        
                     }
                 }
                 

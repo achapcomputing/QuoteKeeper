@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftUI
+import FBSDKCoreKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -60,6 +61,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		// to restore the scene back to its current state.
 	}
 
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        let openURLContext = URLContexts.first
+        if (openURLContext != nil) {
+            ApplicationDelegate.shared.application(
+                UIApplication.shared,
+                open: openURLContext!.url,
+                sourceApplication: openURLContext?.options.sourceApplication,
+                annotation: openURLContext?.options.annotation)
+        }
+    }
 
 }
-
