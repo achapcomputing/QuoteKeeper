@@ -22,7 +22,8 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		loadQuoteData()
+        updateView()
+//		loadQuoteData()
 		
 		searchController.searchBar.delegate = self
 		searchController.searchResultsUpdater = self as? UISearchResultsUpdating
@@ -48,7 +49,7 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 		if isFiltering() {
 			return filteredQuotes.count
 		}
-        return allQuotes.count
+        return allQuotesArray.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -89,7 +90,7 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 		var quote = ""
 		var source = ""
 		var docID = ""
-//        var uid = ""
+        var uid = ""
 //        let currentUserID = Auth.auth().currentUser?.uid
 		let fstore = Firestore.firestore()
 		fstore.collection("quotes").addSnapshotListener({ (snapshot, error) in
@@ -104,11 +105,11 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 					quote = diff.document.data()["quote"] as! String
 					source = diff.document.data()["source"] as! String
 					docID = diff.document.documentID
-//                    uid = diff.document.data()["uid"] as? String ?? "no uid"
+                    uid = diff.document.data()["uid"] as! String
 //                    if uid != currentUserID {
 //                        print("error getting user id and quotes")
 //                    }
-                    let newQuote = Quote(quote: quote, source: source, docID: docID)
+                    let newQuote = Quote(quote: quote, source: source, docID: docID, uid: uid)
 					self.allQuotes[docID] = newQuote
 					//self.allQuotesArray.append(newQuote)
 					// print all quotes in allQuotes array to console
@@ -125,7 +126,7 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 					quote = diff.document.data()["quote"] as! String
 					source = diff.document.data()["source"] as! String
 					docID = diff.document.documentID
-                    let modQuote = Quote(quote: quote, source: source, docID: docID)
+                    let modQuote = Quote(quote: quote, source: source, docID: docID, uid: uid)
 					self.allQuotes[docID] = modQuote
 					//self.allQuotesArray.append(modQuote)
 					// print all quotes in allQuotes array to console
@@ -147,9 +148,10 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 			// runs every update
 			self.allQuotesArray = [] // empties allQuotesArray
 			for (ID, _) in self.allQuotes {
-                //if (self.allQuotes[ID]?.uid == uid) { // if quote was stored by current user
+                if (self.allQuotes[ID]?.uid == Auth.auth().currentUser?.uid) { // if quote was stored by current user
+                    print("use quote")
                     self.allQuotesArray.append(self.allQuotes[ID] ?? Quote()) // adds updated quotes to array for cell display
-                //}
+                }
 			}
 			self.tableView.reloadData()
 		})
@@ -161,6 +163,18 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
     }
     @IBAction func unwindAddtoAllQVC(_ unwindSegue: UIStoryboardSegue) {
         print("unwinding to all quotes")
+    }
+    
+    func updateView() {
+        Auth.auth().addStateDidChangeListener { auth, user in
+            self.loadQuoteData()
+          if let user = user {
+//            self.loadQuoteData()
+            print("User: \(user)")
+          } else {
+            
+          }
+        }
     }
     
 

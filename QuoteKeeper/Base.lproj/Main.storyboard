@@ -847,6 +847,13 @@
                                     <action selector="logoutTouched:" destination="3Ip-NX-mgv" eventType="touchUpInside" id="MDP-34-Uav"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhH-nH-f0i">
+                                <rect key="frame" x="67" y="133" width="176" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -857,11 +864,12 @@
                     </view>
                     <connections>
                         <outlet property="logoutButton" destination="t3C-4i-lhb" id="czn-hy-Tax"/>
+                        <outlet property="nameLabel" destination="hhH-nH-f0i" id="M5E-i7-mdA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xeF-tU-zUE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4827" y="115"/>
+            <point key="canvasLocation" x="4826.0869565217399" y="114.50892857142857"/>
         </scene>
         <!--Account-->
         <scene sceneID="jVb-ZV-hIy">

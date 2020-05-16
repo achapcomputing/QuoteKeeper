@@ -10,7 +10,9 @@ import UIKit
 import FirebaseAuth
 
 class UserViewController: UIViewController {
-
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
     @IBOutlet weak var logoutButton: UIButton!
     @IBAction func logoutTouched(_ sender: Any) {
        if Auth.auth().currentUser != nil {
@@ -27,7 +29,7 @@ class UserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        nameLabel.text = "Welcome \(Auth.auth().currentUser?.email)"
         // Do any additional setup after loading the view.
     }
 
