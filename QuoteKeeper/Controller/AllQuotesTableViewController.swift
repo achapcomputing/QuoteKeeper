@@ -89,7 +89,8 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 		var quote = ""
 		var source = ""
 		var docID = ""
-        let currentUserID = Auth.auth().currentUser?.uid
+//        var uid = ""
+//        let currentUserID = Auth.auth().currentUser?.uid
 		let fstore = Firestore.firestore()
 		fstore.collection("quotes").addSnapshotListener({ (snapshot, error) in
 			guard (snapshot?.documents) != nil else {
@@ -103,7 +104,11 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 					quote = diff.document.data()["quote"] as! String
 					source = diff.document.data()["source"] as! String
 					docID = diff.document.documentID
-                    let newQuote = Quote(quote: quote, source: source, docID: docID, uid: currentUserID!)
+//                    uid = diff.document.data()["uid"] as? String ?? "no uid"
+//                    if uid != currentUserID {
+//                        print("error getting user id and quotes")
+//                    }
+                    let newQuote = Quote(quote: quote, source: source, docID: docID)
 					self.allQuotes[docID] = newQuote
 					//self.allQuotesArray.append(newQuote)
 					// print all quotes in allQuotes array to console
@@ -120,7 +125,7 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 					quote = diff.document.data()["quote"] as! String
 					source = diff.document.data()["source"] as! String
 					docID = diff.document.documentID
-                    let modQuote = Quote(quote: quote, source: source, docID: docID, uid: currentUserID!)
+                    let modQuote = Quote(quote: quote, source: source, docID: docID)
 					self.allQuotes[docID] = modQuote
 					//self.allQuotesArray.append(modQuote)
 					// print all quotes in allQuotes array to console
@@ -142,9 +147,9 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 			// runs every update
 			self.allQuotesArray = [] // empties allQuotesArray
 			for (ID, _) in self.allQuotes {
-                if (self.allQuotes[ID]?.uid == currentUserID) { // if quote was stored by current user
+                //if (self.allQuotes[ID]?.uid == uid) { // if quote was stored by current user
                     self.allQuotesArray.append(self.allQuotes[ID] ?? Quote()) // adds updated quotes to array for cell display
-                }
+                //}
 			}
 			self.tableView.reloadData()
 		})

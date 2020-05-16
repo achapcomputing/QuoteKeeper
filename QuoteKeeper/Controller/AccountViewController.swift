@@ -1,67 +1,87 @@
 //
-//  MoreViewController.swift
+//  AccountViewController.swift
 //  QuoteKeeper
 //
-//  Created by Ashlyn Chapman on 7/23/19.
-//  Copyright © 2019 Ashlyn Chapman. All rights reserved.
+//  Created by Ashlyn Chapman on 5/15/20.
+//  Copyright © 2020 Ashlyn Chapman. All rights reserved.
 //
 
 import UIKit
 import Firebase
-import FirebaseUI
+import FirebaseAuth
 
-class AccountViewController: UIViewController, FUIAuthDelegate {
-
-	var authUI: FUIAuth?
-	
-    @IBOutlet weak var signUpButton: UIButton!
-    @IBAction func signUpButtonTouched(_ sender: Any) {
-        
-    }
+class AccountViewController: UIViewController {
     
-    @IBOutlet weak var loginButton: UIButton!
-	@IBAction func loginButtonTouched(_ sender: Any) {
-		// no user is logged in
-//		if Auth.auth().currentUser == nil {
-//			if let authVC = authUI?.authViewController() {
-//				present(authVC, animated: true, completion: nil)
-//			}
-//		}
-//		else {
-//			do {
-//				try Auth.auth().signOut()
-//				self.loginButton.setTitle("Login", for: .normal)
-//			}
-//			catch {}
-//		}
-	}
-    
-    
-	override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
-		authUI = FUIAuth.defaultAuthUI()
-		authUI?.delegate = self
-		// TODO: Add Facebook and Google Auth (remember to add pods)
-		let providers: [FUIAuthProvider] = [] // enable for Google, Facebook, etc
-		self.authUI?.providers = providers
+        updateView()
+        // Do any additional setup after loading the view.
+        //nameLabel.text = "Welcome!"
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        updateView()
     }
-    */
-	
-	func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
-		// user is signed in, no errors occured
-		if error == nil {
-			loginButton.setTitle("Logout", for: .normal)
-		}
-	}
+    
+    private lazy var UserVC: UserViewController = {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main) // Load Storyboard
+        var viewController = storyboard.instantiateViewController(withIdentifier: "UserVC") as! UserViewController // Instantiate View Controller
+        self.add(asChildViewController: viewController) // Add View Controller as Child View Controller
+        return viewController
+    }()
+
+    private lazy var SignInVC: SignInViewController = {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main) // Load Storyboard
+        var viewController = storyboard.instantiateViewController(withIdentifier: "SignInVC") as! SignInViewController // Instantiate View Controller
+        self.add(asChildViewController: viewController) // Add View Controller as Child View Controller
+        return viewController
+    }()
+    
+     private func updateView() {
+        Auth.auth().addStateDidChangeListener { auth, user in
+          if let user = user {
+            self.remove(asChildViewController: self.SignInVC)
+            self.add(asChildViewController: self.UserVC)
+            print("User: \(user)")
+          } else {
+            self.remove(asChildViewController: self.UserVC)
+            self.add(asChildViewController: self.SignInVC)
+          }
+        }
+//
+//        if let currentUser = Auth.auth().currentUser {
+//            remove(asChildViewController: SignInVC)
+//            add(asChildViewController: UserVC)
+//        } else {
+//            remove(asChildViewController: UserVC)
+//            add(asChildViewController: SignInVC)
+//        }
+    }
+    
+    private func remove(asChildViewController viewController: UIViewController) {
+        // Notify Child View Controller
+        viewController.willMove(toParent: nil)
+
+        // Remove Child View From Superview
+        viewController.view.removeFromSuperview()
+
+        // Notify Child View Controller
+        viewController.removeFromParent()
+    }
+    
+    private func add(asChildViewController viewController: UIViewController) {
+        // Add Child View Controller
+        addChild(viewController)
+
+        // Add Child View as Subview
+        view.addSubview(viewController.view)
+
+        // Configure Child View
+        viewController.view.frame = view.bounds
+        viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+        // Notify Child View Controller
+        viewController.didMove(toParent: self)
+    }
 
 }

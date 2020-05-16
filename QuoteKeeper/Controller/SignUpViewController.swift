@@ -27,6 +27,7 @@ class SignUpViewController: UIViewController {
             // error in fields, display error
             showError(error!)
         } else {
+            errorLabel.alpha = 0
             let firstName = firstNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let lastName = lastNameTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let email = emailTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -47,9 +48,10 @@ class SignUpViewController: UIViewController {
                     ]) { (error) in
                         if error != nil {
                             self.showError("Error saving user data")
+                        } else {
+                            self.dismiss(animated: true, completion: nil)
                         }
                     }
-                    self.transitionToHome()
                     print("Current User: \(Auth.auth().currentUser?.uid)")
                 }
             }
@@ -95,12 +97,6 @@ class SignUpViewController: UIViewController {
     func showError(_ message: String) {
         errorLabel.text = message
         errorLabel.alpha = 1
-    }
-    
-    func transitionToHome() {
-        let homeViewController = self.storyboard?.instantiateViewController(identifier: Constants.homeViewController) as? HomeViewController
-        self.view.window?.rootViewController = homeViewController
-        self.view.window?.makeKeyAndVisible()
     }
 
 }

@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  EmailLoginViewController.swift
 //  QuoteKeeper
 //
 //  Created by Ashlyn Chapman on 5/13/20.
@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseAuth
 
-class LoginViewController: UIViewController {
+class EmailLoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,22 +44,11 @@ class LoginViewController: UIViewController {
                 self.errorLabel.text = error?.localizedDescription
                 self.errorLabel.alpha = 1
             } else {
-                self.transitionToHome()
+                self.dismiss(animated: true, completion: nil)
             }
         }
-        let currentUser = Auth.auth().currentUser
-        var uid: String? = Auth.auth().currentUser?.uid
-        print("Current User: \(uid as Any)")
-    }
-    
-    func setPersistence() {
-        
-    }
-    
-    func transitionToHome() {
-        let homeViewController = self.storyboard?.instantiateViewController(identifier: Constants.homeViewController) as? HomeViewController
-        self.view.window?.rootViewController = homeViewController
-        self.view.window?.makeKeyAndVisible()
+        let uid: String? = Auth.auth().currentUser?.uid
+        print("Logged in. Current user: \(uid as Any)")
     }
 
 }

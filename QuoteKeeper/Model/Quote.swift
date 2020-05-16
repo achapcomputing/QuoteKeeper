@@ -13,20 +13,17 @@ class Quote: NSObject {
 	var quote: String
 	var source: String?
 	var docID: String
-    var uid: String
 	
-    init(quote: String, source: String, docID: String, uid: String) {
+    init(quote: String, source: String, docID: String) {
 		self.quote = quote
 		self.source = source
 		self.docID = docID
-        self.uid = uid
 	}
 	
 	override init() {
 		self.quote = "quote"
 		self.source = "source"
 		self.docID = "docID"
-        self.uid = "uid"
 	}
 	
 }

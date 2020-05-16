@@ -13,7 +13,7 @@
 		DC50E66922FB2DC60012DBD3 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50E66822FB2DC60012DBD3 /* Quote.swift */; };
 		DCCDE2C922E68A2200C451CF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCDE2C822E68A2200C451CF /* DetailViewController.swift */; };
 		DCCDE2CB22E69FD100C451CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DCCDE2CA22E69FD000C451CF /* GoogleService-Info.plist */; };
-		DCCDE2CD22E7A5AD00C451CF /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCDE2CC22E7A5AD00C451CF /* AccountViewController.swift */; };
+		DCCDE2CD22E7A5AD00C451CF /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCDE2CC22E7A5AD00C451CF /* SignInViewController.swift */; };
 		DCCF83A322E5212500E767B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCF83A222E5212500E767B2 /* AppDelegate.swift */; };
 		DCCF83A822E5212500E767B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCCF83A622E5212500E767B2 /* Main.storyboard */; };
 		DCCF83AA22E5212700E767B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCCF83A922E5212700E767B2 /* Assets.xcassets */; };
@@ -22,12 +22,13 @@
 		DCE6FD3922E55740009BAF77 /* QuoteInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FD3822E55740009BAF77 /* QuoteInfo.swift */; };
 		DCE6FD3B22E55A78009BAF77 /* AllQuotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FD3A22E55A77009BAF77 /* AllQuotesTableViewController.swift */; };
 		DD29B28923FF7BC500178330 /* SearchQuotesTableViewController copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD29B28823FF7BC500178330 /* SearchQuotesTableViewController copy.swift */; };
-		DD2F849B246CC66700AF4D71 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F849A246CC66700AF4D71 /* LoginViewController.swift */; };
+		DD2F849B246CC66700AF4D71 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F849A246CC66700AF4D71 /* EmailLoginViewController.swift */; };
 		DD2F849D246CCF5000AF4D71 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F849C246CCF5000AF4D71 /* Constants.swift */; };
 		DD2F849F246CD19900AF4D71 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F849E246CD19900AF4D71 /* Utilities.swift */; };
 		DD2F8D202425264E00573416 /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = DD2F8D1F2425264E00573416 /* Notes */; };
 		DD43F22A245F7EC900693C26 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43F229245F7EC900693C26 /* SignUpViewController.swift */; };
-		DD6B6668246F75C500758DB2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6B6667246F75C500758DB2 /* HomeViewController.swift */; };
+		DDBE0C02246F905B002B8E10 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBE0C01246F905B002B8E10 /* AccountViewController.swift */; };
+		DDBE0C04246F94F9002B8E10 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBE0C03246F94F9002B8E10 /* UserViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +38,7 @@
 		DC50E66822FB2DC60012DBD3 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		DCCDE2C822E68A2200C451CF /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		DCCDE2CA22E69FD000C451CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		DCCDE2CC22E7A5AD00C451CF /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		DCCDE2CC22E7A5AD00C451CF /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		DCCF839F22E5212500E767B2 /* QuoteKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuoteKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCCF83A222E5212500E767B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCCF83A722E5212500E767B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -48,12 +49,13 @@
 		DCE6FD3822E55740009BAF77 /* QuoteInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteInfo.swift; sourceTree = "<group>"; };
 		DCE6FD3A22E55A77009BAF77 /* AllQuotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllQuotesTableViewController.swift; sourceTree = "<group>"; };
 		DD29B28823FF7BC500178330 /* SearchQuotesTableViewController copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchQuotesTableViewController copy.swift"; sourceTree = "<group>"; };
-		DD2F849A246CC66700AF4D71 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		DD2F849A246CC66700AF4D71 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
 		DD2F849C246CCF5000AF4D71 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DD2F849E246CD19900AF4D71 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		DD2F8D1F2425264E00573416 /* Notes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notes; sourceTree = "<group>"; };
 		DD43F229245F7EC900693C26 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		DD6B6667246F75C500758DB2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		DDBE0C01246F905B002B8E10 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		DDBE0C03246F94F9002B8E10 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		E1DAD8A465DCF21C34937A9F /* Pods-QuoteKeeper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuoteKeeper.debug.xcconfig"; path = "Target Support Files/Pods-QuoteKeeper/Pods-QuoteKeeper.debug.xcconfig"; sourceTree = "<group>"; };
 		F52C78FD7AFB415EACA58681 /* Pods-QuoteKeeper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuoteKeeper.release.xcconfig"; path = "Target Support Files/Pods-QuoteKeeper/Pods-QuoteKeeper.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,8 +97,7 @@
 				DC4908C822FB60C7005243BF /* EditViewController.swift */,
 				DD29B28823FF7BC500178330 /* SearchQuotesTableViewController copy.swift */,
 				DCCF83B422E5233F00E767B2 /* AddViewController.swift */,
-				DD6B6667246F75C500758DB2 /* HomeViewController.swift */,
-				DD43F22B245F817E00693C26 /* Login */,
+				DDBE0C00246F8FC3002B8E10 /* Account */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -149,11 +150,21 @@
 		DD43F22B245F817E00693C26 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				DCCDE2CC22E7A5AD00C451CF /* AccountViewController.swift */,
+				DCCDE2CC22E7A5AD00C451CF /* SignInViewController.swift */,
 				DD43F229245F7EC900693C26 /* SignUpViewController.swift */,
-				DD2F849A246CC66700AF4D71 /* LoginViewController.swift */,
+				DD2F849A246CC66700AF4D71 /* EmailLoginViewController.swift */,
 			);
 			name = Login;
+			sourceTree = "<group>";
+		};
+		DDBE0C00246F8FC3002B8E10 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				DDBE0C01246F905B002B8E10 /* AccountViewController.swift */,
+				DDBE0C03246F94F9002B8E10 /* UserViewController.swift */,
+				DD43F22B245F817E00693C26 /* Login */,
+			);
+			name = Account;
 			sourceTree = "<group>";
 		};
 		F099C28202AB7041E31DCC86 /* Pods */ = {
@@ -300,18 +311,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD2F849B246CC66700AF4D71 /* LoginViewController.swift in Sources */,
+				DD2F849B246CC66700AF4D71 /* EmailLoginViewController.swift in Sources */,
+				DDBE0C04246F94F9002B8E10 /* UserViewController.swift in Sources */,
 				DD43F22A245F7EC900693C26 /* SignUpViewController.swift in Sources */,
 				DD2F849F246CD19900AF4D71 /* Utilities.swift in Sources */,
 				DD29B28923FF7BC500178330 /* SearchQuotesTableViewController copy.swift in Sources */,
 				DC4908C922FB60C7005243BF /* EditViewController.swift in Sources */,
-				DD6B6668246F75C500758DB2 /* HomeViewController.swift in Sources */,
 				DCE6FD3922E55740009BAF77 /* QuoteInfo.swift in Sources */,
 				DCE6FD3B22E55A78009BAF77 /* AllQuotesTableViewController.swift in Sources */,
 				DCCDE2C922E68A2200C451CF /* DetailViewController.swift in Sources */,
 				DD2F849D246CCF5000AF4D71 /* Constants.swift in Sources */,
-				DCCDE2CD22E7A5AD00C451CF /* AccountViewController.swift in Sources */,
+				DCCDE2CD22E7A5AD00C451CF /* SignInViewController.swift in Sources */,
 				DCCF83A322E5212500E767B2 /* AppDelegate.swift in Sources */,
+				DDBE0C02246F905B002B8E10 /* AccountViewController.swift in Sources */,
 				DC4908CE22FD145B005243BF /* CopyPaste.swift in Sources */,
 				DC50E66922FB2DC60012DBD3 /* Quote.swift in Sources */,
 				DCCF83B522E5233F00E767B2 /* AddViewController.swift in Sources */,
