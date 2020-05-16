@@ -89,6 +89,7 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 		var quote = ""
 		var source = ""
 		var docID = ""
+        let currentUserID = Auth.auth().currentUser?.uid
 		let fstore = Firestore.firestore()
 		fstore.collection("quotes").addSnapshotListener({ (snapshot, error) in
 			guard (snapshot?.documents) != nil else {
@@ -102,7 +103,7 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 					quote = diff.document.data()["quote"] as! String
 					source = diff.document.data()["source"] as! String
 					docID = diff.document.documentID
-					let newQuote = Quote(quote: quote, source: source, docID: docID)
+                    let newQuote = Quote(quote: quote, source: source, docID: docID, uid: currentUserID!)
 					self.allQuotes[docID] = newQuote
 					//self.allQuotesArray.append(newQuote)
 					// print all quotes in allQuotes array to console
@@ -119,7 +120,7 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 					quote = diff.document.data()["quote"] as! String
 					source = diff.document.data()["source"] as! String
 					docID = diff.document.documentID
-					let modQuote = Quote(quote: quote, source: source, docID: docID)
+                    let modQuote = Quote(quote: quote, source: source, docID: docID, uid: currentUserID!)
 					self.allQuotes[docID] = modQuote
 					//self.allQuotesArray.append(modQuote)
 					// print all quotes in allQuotes array to console
@@ -141,14 +142,22 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 			// runs every update
 			self.allQuotesArray = [] // empties allQuotesArray
 			for (ID, _) in self.allQuotes {
-				self.allQuotesArray.append(self.allQuotes[ID] ?? Quote()) // adds updated quotes to array for cell display
+                if (self.allQuotes[ID]?.uid == currentUserID) { // if quote was stored by current user
+                    self.allQuotesArray.append(self.allQuotes[ID] ?? Quote()) // adds updated quotes to array for cell display
+                }
 			}
 			self.tableView.reloadData()
 		})
 	}
 	
-	// for editVC cancelling back to allQuotesVC
-	@IBAction func unwindToAllQuotesVC(_ unwindSegue: UIStoryboardSegue) { }
+	// for editVC, addVC cancelling back to allQuotesVC
+	@IBAction func unwindToAllQuotesVC(_ unwindSegue: UIStoryboardSegue) {
+        print("unwinding to all quotes")
+    }
+    @IBAction func unwindAddtoAllQVC(_ unwindSegue: UIStoryboardSegue) {
+        print("unwinding to all quotes")
+    }
+    
 
 	// MARK: - Search Functions
 	func searchBarIsEmpty() -> Bool {

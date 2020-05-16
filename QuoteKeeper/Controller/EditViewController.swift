@@ -24,7 +24,7 @@ class EditViewController: UIViewController {
 	var selectedDocID: String = ""
 	
 	@IBAction func cancelButtonTouched(_ sender: Any) {
-		performSegue(withIdentifier: "unwindSegueToAllQuotesVC", sender: nil)
+		performSegue(withIdentifier: "unwindToAllQuotesVC", sender: nil)
 	}
 	
 	@IBAction func saveButtonTouched(_ sender: Any) {
@@ -57,7 +57,7 @@ class EditViewController: UIViewController {
 			}
 		}
         
-        // performSegue(withIdentifier: "unwindSegueToAllQuotesVC", sender: nil)
+        performSegue(withIdentifier: "unwindToAllQuotesVC", sender: nil)
 	}
 	
     override func viewDidLoad() {

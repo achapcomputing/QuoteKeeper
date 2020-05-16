@@ -8,10 +8,11 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 class AddViewController: UIViewController, UITextFieldDelegate {
 
-	@IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var textView: UITextView!
 	@IBOutlet weak var presetButton: UIButton!
 	@IBOutlet weak var sourceLabel: UILabel!
 	@IBOutlet weak var sourceText: UITextField!
@@ -25,40 +26,51 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var notesText: UITextView!
     
     @IBAction func saveButtonTouched(_ sender: Any) {
-		
-		let quote = textView.text
-		let source = sourceText.text
-		
-		let medium = titleText.text
-		let char = characterText.text
-		let pageNum = pageText.text
+        let quote = textView.text
+        let source = sourceText.text
+          
+        let medium = titleText.text
+        let char = characterText.text
+        let pageNum = pageText.text
         let notes = notesText.text
-		
-		let fstore = Firestore.firestore()
-		var ref: DocumentReference? = nil
-		var docID: String = "-1"
-		
-		ref = fstore.collection("quotes").addDocument(data: ["quote" : quote ?? "", "source" : source ?? ""]) { err in
-			if let err = err {
-				print("Error adding document: \(err)")
-			} else {
-				docID = ref!.documentID
-				ref!.updateData(["docID" : docID])
-				print("quote document added with ID: \(docID)")
-				
-				// Add the extra info about the quote
-                fstore.collection("quotes-info").document("info-\(docID)").setData(["medium" : medium ?? "", "char" : char ?? "", "page-num" : pageNum ?? "", "notes" : notes ?? ""]) { err in
-					if let err = err {
-						print("Error adding document: \(err)")
-					} else {
-						print("quotes-info document added with ID: info-\(docID)")
-					}
-				}
-			}
-		}
-		print("Saved")
-	}
-	
+        
+        let fstore = Firestore.firestore()
+        var ref: DocumentReference? = nil
+        var docID: String = "-1"
+          
+        ref = fstore.collection("quotes").addDocument(data: [
+            "quote" : quote ?? "",
+            "source" : source ?? "",
+            "uid" : Auth.auth().currentUser?.uid ?? ""
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                docID = ref!.documentID
+                ref!.updateData(["docID" : docID])
+                print("quote document added with ID: \(docID)")
+                  
+                // Add the extra info about the quote
+                fstore.collection("quotes-info").document("info-\(docID)").setData([
+                    "medium" : medium ?? "",
+                    "char" : char ?? "",
+                    "page-num" : pageNum ?? "",
+                    "notes" : notes ?? ""
+                ]) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("quotes-info document added with ID: info-\(docID)")
+                    }
+                }
+            }
+        }
+        print("Saved")
+        
+        //performSegue(withIdentifier: "unwindAddtoAllQVC", sender: nil)
+        
+    }
+    
 	var quote = Quote()
 	var quoteInfo = QuoteInfo()
 	

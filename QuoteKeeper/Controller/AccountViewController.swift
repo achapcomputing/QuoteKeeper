@@ -14,23 +14,29 @@ class AccountViewController: UIViewController, FUIAuthDelegate {
 
 	var authUI: FUIAuth?
 	
-	@IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var signUpButton: UIButton!
+    @IBAction func signUpButtonTouched(_ sender: Any) {
+        
+    }
+    
+    @IBOutlet weak var loginButton: UIButton!
 	@IBAction func loginButtonTouched(_ sender: Any) {
 		// no user is logged in
-		if Auth.auth().currentUser == nil {
-			if let authVC = authUI?.authViewController() {
-				present(authVC, animated: true, completion: nil)
-			}
-		}
-		else {
-			do {
-				try Auth.auth().signOut()
-				self.loginButton.setTitle("Login", for: .normal)
-			}
-			catch {}
-		}
+//		if Auth.auth().currentUser == nil {
+//			if let authVC = authUI?.authViewController() {
+//				present(authVC, animated: true, completion: nil)
+//			}
+//		}
+//		else {
+//			do {
+//				try Auth.auth().signOut()
+//				self.loginButton.setTitle("Login", for: .normal)
+//			}
+//			catch {}
+//		}
 	}
-	
+    
+    
 	override func viewDidLoad() {
         super.viewDidLoad()
 		authUI = FUIAuth.defaultAuthUI()
