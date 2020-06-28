@@ -23,48 +23,43 @@ class EditViewController: UIViewController {
 	var selectedQuoteInfo: QuoteInfo? = QuoteInfo()
 	var selectedDocID: String = ""
 	
-	@IBAction func cancelButtonTouched(_ sender: Any) {
-		performSegue(withIdentifier: "unwindToAllQuotesVC", sender: nil)
-	}
-	
-	@IBAction func saveButtonTouched(_ sender: Any) {
-		let quote = textView.text
-		let source = sourceTF.text
-		let medium = mediumTF.text
-		let char = charTF.text
-		let pageNum = pageNumTF.text
-        let notes = notesView.text
-		
-		let fstore = Firestore.firestore()
-		var ref: DocumentReference? = nil
-		
-		// updates quotes collection
-		ref = fstore.collection("quotes").document(selectedDocID)
-		ref?.setData(["quote" : quote ?? "", "source" : source ?? ""], merge: true) { err in
-			if let err = err {
-				print("Error updating document: \(err)")
-			} else {
-				print("quote document updated with ID: \(self.selectedDocID)")
-				
-				// updates quotes-info collection
-                fstore.collection("quotes-info").document("info-\(self.selectedDocID)").setData(["medium" : medium ?? "", "char" : char ?? "", "page-num" : pageNum ?? "", "notes" : notes ?? ""]) { err in
-					if let err = err {
-						print("Error updating document: \(err)")
-					} else {
-						print("quotes-info document updated with ID: \(self.selectedDocID)")
-					}
-				}
-			}
-		}
-        
-        performSegue(withIdentifier: "unwindToAllQuotesVC", sender: nil)
-	}
-	
     override func viewDidLoad() {
         super.viewDidLoad()
 		print("editQuotes: \(String(describing: selectedQuote?.quote))")
         // Do any additional setup after loading the view.
 		setEditLabels()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        let quote = textView.text
+        let source = sourceTF.text
+        let medium = mediumTF.text
+        let char = charTF.text
+        let pageNum = pageNumTF.text
+        let notes = notesView.text
+        
+        let fstore = Firestore.firestore()
+        var ref: DocumentReference? = nil
+        print("Saved touched")
+        // updates quotes collection
+        ref = fstore.collection("quotes").document(selectedDocID)
+        ref?.setData(["quote" : quote ?? "", "source" : source ?? ""], merge: true) { err in
+            print("HELP")
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("quote document updated with ID: \(self.selectedDocID)")
+                
+                // updates quotes-info collection
+                fstore.collection("quotes-info").document("info-\(self.selectedDocID)").setData(["medium" : medium ?? "", "char" : char ?? "", "page-num" : pageNum ?? "", "notes" : notes ?? ""]) { err in
+                    if let err = err {
+                        print("Error updating document: \(err)")
+                    } else {
+                        print("quotes-info document updated with ID: \(self.selectedDocID)")
+                    }
+                }
+            }
+        }
     }
 	
 	func setEditLabels() {
@@ -75,16 +70,5 @@ class EditViewController: UIViewController {
 		pageNumTF.text = selectedQuoteInfo?.pageNum
         notesView.text = selectedQuoteInfo?.notes
 	}
-	
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

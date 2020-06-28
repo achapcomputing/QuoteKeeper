@@ -12,22 +12,18 @@ import FirebaseAuth
 
 class AddViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var savedLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
-	@IBOutlet weak var presetButton: UIButton!
-	@IBOutlet weak var sourceLabel: UILabel!
 	@IBOutlet weak var sourceText: UITextField!
-	@IBOutlet weak var pageLabel: UILabel!
 	@IBOutlet weak var pageText: UITextField!
-	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var titleText: UITextField!
-	@IBOutlet weak var characterLabel: UILabel!
 	@IBOutlet weak var characterText: UITextField!
-    @IBOutlet weak var notesLabel: UILabel!
     @IBOutlet weak var notesText: UITextView!
     
     @IBAction func saveButtonTouched(_ sender: Any) {
         let quote = textView.text
         let source = sourceText.text
+        let uid = Auth.auth().currentUser?.uid
           
         let medium = titleText.text
         let char = characterText.text
@@ -41,7 +37,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         ref = fstore.collection("quotes").addDocument(data: [
             "quote" : quote ?? "",
             "source" : source ?? "",
-            "uid" : Auth.auth().currentUser?.uid ?? ""
+            "uid" : uid ?? ""
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
@@ -58,17 +54,14 @@ class AddViewController: UIViewController, UITextFieldDelegate {
                     "notes" : notes ?? ""
                 ]) { err in
                     if let err = err {
-                        print("Error adding document: \(err)")
+                        print("Error adding info document: \(err)")
                     } else {
                         print("quotes-info document added with ID: info-\(docID)")
                     }
                 }
             }
         }
-        print("Saved")
-        
-        //performSegue(withIdentifier: "unwindAddtoAllQVC", sender: nil)
-        
+        savedLabel.alpha = 1
     }
     
 	var quote = Quote()
@@ -76,16 +69,10 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        savedLabel.alpha = 0
 		sourceText.delegate = self
 		pageText.delegate = self
 		titleText.delegate = self
-		
-		if quoteInfo.medium != "medium" {
-			titleLabel.text = quoteInfo.medium
-			characterLabel.text = quoteInfo.char
-			pageLabel.text = quoteInfo.pageNum
-            notesLabel.text = quoteInfo.notes
-		}
 	}
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

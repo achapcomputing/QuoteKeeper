@@ -11,7 +11,8 @@ import Firebase
 
 class DetailViewController: UIViewController {
 
-	@IBOutlet weak var quoteLabel: UILabel!
+    @IBOutlet weak var deletedLabel: UILabel!
+    @IBOutlet weak var quoteLabel: UILabel!
 	@IBOutlet weak var sourceLabel: UILabel!
 	@IBOutlet weak var mediumLabel: UILabel!
 	@IBOutlet weak var charLabel: UILabel!
@@ -35,6 +36,7 @@ class DetailViewController: UIViewController {
 				print("Document info-\(self.selectedDocID) successfully removed!")
 			}
 		}
+        deletedLabel.alpha = 1
 	}
 	
 	@IBAction func shareButtonTouched(_ sender: Any) {
@@ -48,6 +50,7 @@ class DetailViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+        deletedLabel.alpha = 0
 		loadQuoteInfoData()
     }
 	

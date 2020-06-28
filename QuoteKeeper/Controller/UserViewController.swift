@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseAuth
 
 class UserViewController: UIViewController {
@@ -29,8 +30,26 @@ class UserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameLabel.text = "Welcome \(Auth.auth().currentUser?.email)"
+        getUser()
         // Do any additional setup after loading the view.
+    }
+    
+    func getUser() {
+        let fstore = Firestore.firestore()
+        let uid = Auth.auth().currentUser?.uid
+        print("UID + \(uid!)")
+        let docRef = fstore.collection("users").document("user-\(uid!)")
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? ""
+                print("Document data: \(dataDescription)")
+//                print(document.data()!["first name"]!)
+                let name = document.data()!["first name"]! as! String
+                self.nameLabel.text = "Welcome, \(name)"
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
 
 }

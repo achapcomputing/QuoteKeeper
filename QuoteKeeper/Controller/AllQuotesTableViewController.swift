@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class AllQuotesTableViewController: UITableViewController, UITabBarControllerDelegate, UISearchBarDelegate {
-	
+
 	var allQuotes = [String : Quote]()
 	var allQuotesArray = [Quote]()
 	var filteredQuotes = [Quote]()
@@ -19,12 +19,10 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 	let searchController = UISearchController(searchResultsController: nil)
     //TODO: add search database button for all quotes VC
     // let searchDBButton = UIButton(type: UIButton.ButtonType)
-	
+    
 	override func viewDidLoad() {
         super.viewDidLoad()
         updateView()
-//		loadQuoteData()
-		
 		searchController.searchBar.delegate = self
 		searchController.searchResultsUpdater = self as? UISearchResultsUpdating
 		searchController.obscuresBackgroundDuringPresentation = false
@@ -61,7 +59,7 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 		} else {
 			quote = allQuotesArray[indexPath.row]
 		}
-		
+    
 		cell.textLabel?.text = quote.quote // shows quote in each cell
 		cell.detailTextLabel?.text = quote.source // adds source to each cell
 		print("cellQuotes: \(allQuotesArray[indexPath.row].quote)")
@@ -77,12 +75,16 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 		}
 		print("allToDetailSegueSelectedQuote: \(allQuotesArray[indexPath.row])")
 	}
+    
+    @IBAction func unwindToTable(_ sender: UIStoryboardSegue) {
+        
+    }
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.destination is DetailViewController {
 			let detailVC = segue.destination as? DetailViewController
 			detailVC?.selectedQuote = sender as! Quote
-			print("selectedQuote: \(detailVC?.selectedQuote)")
+            print("selectedQuote: \(String(describing: detailVC?.selectedQuote))")
 		}
 	}
 	
@@ -106,9 +108,6 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 					source = diff.document.data()["source"] as! String
 					docID = diff.document.documentID
                     uid = diff.document.data()["uid"] as! String
-//                    if uid != currentUserID {
-//                        print("error getting user id and quotes")
-//                    }
                     let newQuote = Quote(quote: quote, source: source, docID: docID, uid: uid)
 					self.allQuotes[docID] = newQuote
 					//self.allQuotesArray.append(newQuote)
@@ -156,24 +155,10 @@ class AllQuotesTableViewController: UITableViewController, UITabBarControllerDel
 			self.tableView.reloadData()
 		})
 	}
-	
-	// for editVC, addVC cancelling back to allQuotesVC
-	@IBAction func unwindToAllQuotesVC(_ unwindSegue: UIStoryboardSegue) {
-        print("unwinding to all quotes")
-    }
-    @IBAction func unwindAddtoAllQVC(_ unwindSegue: UIStoryboardSegue) {
-        print("unwinding to all quotes")
-    }
     
     func updateView() {
         Auth.auth().addStateDidChangeListener { auth, user in
             self.loadQuoteData()
-          if let user = user {
-//            self.loadQuoteData()
-            print("User: \(user)")
-          } else {
-            
-          }
         }
     }
     

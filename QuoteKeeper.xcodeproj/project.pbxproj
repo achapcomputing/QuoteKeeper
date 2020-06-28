@@ -21,7 +21,6 @@
 		DCCF83B522E5233F00E767B2 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCF83B422E5233F00E767B2 /* AddViewController.swift */; };
 		DCE6FD3922E55740009BAF77 /* QuoteInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FD3822E55740009BAF77 /* QuoteInfo.swift */; };
 		DCE6FD3B22E55A78009BAF77 /* AllQuotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FD3A22E55A77009BAF77 /* AllQuotesTableViewController.swift */; };
-		DD29B28923FF7BC500178330 /* SearchQuotesTableViewController copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD29B28823FF7BC500178330 /* SearchQuotesTableViewController copy.swift */; };
 		DD2F849B246CC66700AF4D71 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F849A246CC66700AF4D71 /* EmailLoginViewController.swift */; };
 		DD2F849D246CCF5000AF4D71 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F849C246CCF5000AF4D71 /* Constants.swift */; };
 		DD2F849F246CD19900AF4D71 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F849E246CD19900AF4D71 /* Utilities.swift */; };
@@ -48,7 +47,6 @@
 		DCCF83B422E5233F00E767B2 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		DCE6FD3822E55740009BAF77 /* QuoteInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteInfo.swift; sourceTree = "<group>"; };
 		DCE6FD3A22E55A77009BAF77 /* AllQuotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllQuotesTableViewController.swift; sourceTree = "<group>"; };
-		DD29B28823FF7BC500178330 /* SearchQuotesTableViewController copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchQuotesTableViewController copy.swift"; sourceTree = "<group>"; };
 		DD2F849A246CC66700AF4D71 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
 		DD2F849C246CCF5000AF4D71 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DD2F849E246CD19900AF4D71 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -95,7 +93,6 @@
 				DCE6FD3A22E55A77009BAF77 /* AllQuotesTableViewController.swift */,
 				DCCDE2C822E68A2200C451CF /* DetailViewController.swift */,
 				DC4908C822FB60C7005243BF /* EditViewController.swift */,
-				DD29B28823FF7BC500178330 /* SearchQuotesTableViewController copy.swift */,
 				DCCF83B422E5233F00E767B2 /* AddViewController.swift */,
 				DDBE0C00246F8FC3002B8E10 /* Account */,
 			);
@@ -315,7 +312,6 @@
 				DDBE0C04246F94F9002B8E10 /* UserViewController.swift in Sources */,
 				DD43F22A245F7EC900693C26 /* SignUpViewController.swift in Sources */,
 				DD2F849F246CD19900AF4D71 /* Utilities.swift in Sources */,
-				DD29B28923FF7BC500178330 /* SearchQuotesTableViewController copy.swift in Sources */,
 				DC4908C922FB60C7005243BF /* EditViewController.swift in Sources */,
 				DCE6FD3922E55740009BAF77 /* QuoteInfo.swift in Sources */,
 				DCE6FD3B22E55A78009BAF77 /* AllQuotesTableViewController.swift in Sources */,
